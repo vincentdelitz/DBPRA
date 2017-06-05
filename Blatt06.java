@@ -28,13 +28,14 @@ public class Blatt06 extends Basis06 {
 
 	public static void main(String[] args) throws SQLException,
 			LabCourseException {
-		/*
-		 * System.out.println("Please give a name for the customer:"); String
-		 * name = readString(); Blatt06 test = new Blatt06(); int result =
-		 * test.aufg_1_2(name);
-		 */
+	
+		 /*System.out.println("Please give a name for the customer:"); 
+		 String name = readString();
+		 Blatt06 test = new Blatt06(); 
+		 int result = test.aufg_1_2(name);*/
+		 
 
-		/*System.out.println("Please give a name for the supplier:");
+		System.out.println("Please give a name for the supplier:");
 		String supplier = readString();
 		System.out.println("Please give a name for the part:");
 		String part = readString();
@@ -48,7 +49,7 @@ public class Blatt06 extends Basis06 {
 		// Testwerte: 4, 10, 69, 4.20
 		// SWIRL, S87904
 		 
-		 */
+		 
 		
 		//sofern der User nicht die Möglichkeit hat Wildcards zu verwenden, sondern das System das automatisch macht, wäre 1_2 fertig
 		/*for(int i=0; i<4;i++) {
@@ -70,13 +71,16 @@ public class Blatt06 extends Basis06 {
 			//Probleme mit dem casten und zuweisen der Variablenwerte
 			//Ganz wichtig: Deine Annahme ist, dass wenn der User ein bereits existierendes Part auswählt, dass nur ein neuer Eintrag in Partsupp verändert wird.
 							// -> Was wäre aber, wenn es so gemeint ist, dass der User den Eintrag in part verändern (updaten) sollen könnte!?
+							 	//->steht so nicht in der Angabe und wir müssen es ja nicht komplizierter machen als es ist
 		}*/
 		
-		String customer = readString("Please give a name for the customer:");
-		Blatt06_new test = new Blatt06_new();
-		boolean result = test.aufg_1_4(customer);
+		/*String customer = readString("Please give a name for the customer:");
+		Blatt06 test = new Blatt06();
+		boolean result = test.aufg_1_4(customer);*/
 	}
 
+	
+	//hier muessen glaube ich noch die ganzen Zahlenwerte überprüft werden, dass sie nicht negativ sein können
 	public boolean aufg_1_1(String supplier, String name, Integer availqty,
 			BigDecimal supplycost) throws SQLException, LabCourseException {
 
@@ -178,6 +182,8 @@ public class Blatt06 extends Basis06 {
 				 * Fehler muss abgefangen werden, bei dem der partname nicht gefunden werden konnte
 				 * 	-> Leider ist der part name definitiv nicht eindeutig (siehe Tabelle in der DB)
 				 * 		-> Hier müssten wir evtl. eine weitere if-Abfrage einbauen
+				 * 			-> ok guter Punkt, dann ist meine Assumption falsch und wir geben dem User nochmals eine Auswahl von
+				 * 				Parts und er soll dann anhand des eingebenen Partkey entscheiden; dann müssten wir ja allerdings auch die Query ändern
 				 */
 				String query_partkey = "SELECT partkey FROM Part "
 						+ "WHERE name = ?";
@@ -224,15 +230,6 @@ public class Blatt06 extends Basis06 {
 					System.out.println("Too long. Enter new type");
 					type = readString();
 				}
-				
-				/*if (type.length() > 25) {
-					System.out.println("too long");
-					// Exception
-					return false;
-				}*/
-
-				// Wie herausfinden, ob Partkey schon vergeben ist?
-					// -> Einfach Abfrage ob bei Partkey ResultCount > 0 ist
 
 				System.out.println("Enter the retailprice as a double with 2 digits after the point:");
 				//Exception, wenn erst gar kein BigDecimal eingegeben wird.
@@ -258,9 +255,6 @@ public class Blatt06 extends Basis06 {
 					throw new LabCourseException("Retailprice can not be negativ");
 				}
 				
-
-				// Actually, we need to check the format of the double here as
-				// well.
 				
 				/*
 				 * In the following we retrieve the highest existing partkey.
@@ -332,6 +326,9 @@ public class Blatt06 extends Basis06 {
 		return true;
 	}
 
+	
+	// hier fehlt noch eine Exception falls der User-Input keine Ergebnis aufweist, also wenn du z.B "ffffff" eingigbst
+	// sollte dem User angezeigt werden, dass seine Suche ergebnislos verlief und evtl. ihn nochmal suchen lassen
 	public int aufg_1_2(String name) throws SQLException, LabCourseException {
 
 		int rs_counter = 0;
@@ -400,6 +397,13 @@ public class Blatt06 extends Basis06 {
 		return 0;
 	}
 
+	
+	/*
+	 * For the deletion of a customer and potential linked orders
+	 * we assume that the orders table and its foreign keys are 
+	 * declared with the ON DELETE CASCADE clause in order to
+	 * avoid constraint errors.
+	 */
 	public boolean aufg_1_4(String name) throws SQLException,
 			LabCourseException {
 
@@ -488,10 +492,11 @@ public class Blatt06 extends Basis06 {
 			}
 			
 			if(accountBalance<0.00){
-				//System.out.println("Account Balance is negative");
+				
 				throw new LabCourseException("Account Balance is negative");
 				//return false;
 					// -> unreachable statement. Wie lösen wir das Problem?
+							//-> wir lassen das return-Statement einfach weg, da ja die Exception da ist
 			}
 			
 			// end transaction
@@ -517,6 +522,7 @@ public class Blatt06 extends Basis06 {
 					throw new SQLException("There is one order for the custkey that is not ok");
 					//return false;
 					// -> unreachable statement. Wie lösen wir das Problem?
+					//-> wir lassen das return-Statement einfach weg, da ja die Exception da ist
 				}
 			}
 			con.commit();
