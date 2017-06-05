@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 import java.sql.*;
+import java.math.RoundingMode;
 // package to read input from the user
 import java.util.Scanner;
 
@@ -20,8 +21,9 @@ public class Blatt06 extends Basis06 {
 		return readString();
 	}
 
+	//Habe hier die readString Funktion leicht verändert, aber jetzt funktioniert sie
 	private static String readString() {
-		return (new Scanner(System.in)).next();
+		return (new Scanner(System.in)).nextLine();
 	}
 
 	public static void main(String[] args) throws SQLException,
@@ -41,22 +43,38 @@ public class Blatt06 extends Basis06 {
 		Integer availqty = new Integer(s.nextInt());
 		System.out.println("Please give the supplying costs as BigDecimal:");
 		BigDecimal supplycost = s.nextBigDecimal();
-
 		Blatt06 test = new Blatt06();
 		boolean result = test.aufg_1_1(supplier, part, availqty, supplycost);
-
 		// Testwerte: 4, 10, 69, 4.20
 		// SWIRL, S87904
 		 
 		 */
 		
+		//sofern der User nicht die Möglichkeit hat Wildcards zu verwenden, sondern das System das automatisch macht, wäre 1_2 fertig
+		/*for(int i=0; i<4;i++) {
+			String name = readString("Please give a name for the customer:");
+			//System.out.println(name);
+			Blatt06_new test = new Blatt06_new(); 
+			int result = test.aufg_1_2(name);
+			System.out.println(result);
+		}*/
 		
-		 
-		 String name = readString("Please give a name for the customer:"); 
-		 Blatt06 test = new Blatt06(); 
-		 boolean result = test.aufg_1_4(name);
-		 
-
+		/*for(int i=0; i<4;i++) {
+			String supplier = readString("Please give a name for the supplier:"); 
+			String name = readString("Please give a name for the part:");
+			Integer availqty = Integer.valueOf(200);
+			BigDecimal supplycost = BigDecimal.valueOf(200.00); 
+			Blatt06_new test = new Blatt06_new(); 
+			boolean result = test.aufg_1_1(supplier, name, availqty, supplycost);
+			System.out.println("Funktionsrückgabe (result): " + result);
+			//Probleme mit dem casten und zuweisen der Variablenwerte
+			//Ganz wichtig: Deine Annahme ist, dass wenn der User ein bereits existierendes Part auswählt, dass nur ein neuer Eintrag in Partsupp verändert wird.
+							// -> Was wäre aber, wenn es so gemeint ist, dass der User den Eintrag in part verändern (updaten) sollen könnte!?
+		}*/
+		
+		String customer = readString("Please give a name for the customer:");
+		Blatt06_new test = new Blatt06_new();
+		boolean result = test.aufg_1_4(customer);
 	}
 
 	public boolean aufg_1_1(String supplier, String name, Integer availqty,
@@ -64,6 +82,7 @@ public class Blatt06 extends Basis06 {
 
 		String query = "INSERT INTO partsupp(partkey,suppkey,availqty,supplycost) "
 				+ "VALUES(?,?,?,?)";
+		String DeleteQuery = "DELETE FROM partsupp WHERE partkey = ? AND suppkey = ?";
 
 		try {
 			// Load vendor-specific driver
@@ -81,6 +100,7 @@ public class Blatt06 extends Basis06 {
 
 			// prepare stmt
 			PreparedStatement ps = con.prepareStatement(query);
+			PreparedStatement ps_Delete = con.prepareStatement(DeleteQuery);
 
 			/*
 			 * The rough structure of the method and the following LoCs is: 1.
@@ -98,8 +118,17 @@ public class Blatt06 extends Basis06 {
 			PreparedStatement ps_suppkey = con.prepareStatement(query_suppkey);
 			ps_suppkey.setString(1, supplier);
 			ResultSet rs_suppkey = ps_suppkey.executeQuery();
+			
+			//-------default----------
+			int suppkey = 0;
+			//------------------------
+			try {
 			rs_suppkey.next();
-			int suppkey = rs_suppkey.getInt(1);
+			suppkey = rs_suppkey.getInt(1);
+			} catch(Exception e) {
+				//throw new LabCourseException("Kein Supplier mit entsprechendem Namen gefunden");
+				throw new SQLException("No supplier with the entered name found");
+			}
 
 			con.commit();
 
@@ -114,23 +143,23 @@ public class Blatt06 extends Basis06 {
 			 * if he wants to use an existing one. Therefore, only the letters E
 			 * and N are valid for the selection.
 			 */
-			System.out
-					.println("Do you want to add a new (N) or existing (E) product? Enter the letter:");
-			String decision = readString();
-			boolean neu;
+			System.out.println("Do you want to add a new (N) or existing (E) product? Enter the letter:");
+			String decision = "default";
+			boolean neu = true;
 
 			// Evaluate the user input
-			if (decision.contentEquals("E")) {
-				neu = false;
-				System.out
-						.println("You decided to enter an existing product to the offer");
-			} else if (decision.contentEquals("N")) {
-				neu = true;
-				System.out
-						.println("You decided to enter a new product to the offer");
-			} else {
-				System.out.println("You didn't enter 'E' or 'N'!");
-				return false;
+			while (!(decision.equals("E")||decision.equals("N"))) {
+				decision = readString();
+				if (decision.contentEquals("E")) {
+					neu = false;
+					System.out.println("You decided to enter an existing product to the offer");
+				} else if (decision.contentEquals("N")) {
+					neu = true;
+					System.out.println("You decided to enter a new product to the offer");
+				} else {
+					System.out.println("You didn't enter 'E' or 'N'!");
+					System.out.println("Do you want to add a new (N) or existing (E) product? Enter the letter:");
+				}
 			}
 
 			/*
@@ -146,21 +175,38 @@ public class Blatt06 extends Basis06 {
 				/*
 				 * Our assumption here is that the part name is unique and
 				 * correctly written.
+				 * Fehler muss abgefangen werden, bei dem der partname nicht gefunden werden konnte
+				 * 	-> Leider ist der part name definitiv nicht eindeutig (siehe Tabelle in der DB)
+				 * 		-> Hier müssten wir evtl. eine weitere if-Abfrage einbauen
 				 */
 				String query_partkey = "SELECT partkey FROM Part "
 						+ "WHERE name = ?";
-				PreparedStatement ps_partkey = con
-						.prepareStatement(query_partkey);
+				PreparedStatement ps_partkey = con.prepareStatement(query_partkey);
 				ps_partkey.setString(1, name);
 				ResultSet rs_partkey = ps_partkey.executeQuery();
+				try {
 				rs_partkey.next();
 				partkey = rs_partkey.getInt(1);
+				} catch(Exception e) {
+					//throw new LabCourseException("Kein existing Part mit entsprechendem Namen gefunden");
+					throw new SQLException("No existing part with the entered name found");
+				}
 
 				System.out.println("Partkey for " + name + " is: " + partkey);
 				con.commit();
 
 				// close statement
 				ps_partkey.close();
+				
+				//Eintrag aus partsupp muss zunächst gelöscht werden
+				ps_Delete.setInt(1, partkey);
+				ps_Delete.setInt(2, suppkey);
+				
+				int id_new_row_delete = ps_Delete.executeUpdate();
+				
+				con.commit();
+				ps_Delete.close();
+				
 			} else {
 				/*
 				 * If we need to create the product, we need at first some more
@@ -174,18 +220,44 @@ public class Blatt06 extends Basis06 {
 				String type = readString();
 				// According to our definition, we are solely allowed to use
 				// maximum 25 chars for the type.
-				if (type.length() > 25) {
+				while (type.length() > 25) {
+					System.out.println("Too long. Enter new type");
+					type = readString();
+				}
+				
+				/*if (type.length() > 25) {
 					System.out.println("too long");
 					// Exception
 					return false;
-				}
+				}*/
 
 				// Wie herausfinden, ob Partkey schon vergeben ist?
+					// -> Einfach Abfrage ob bei Partkey ResultCount > 0 ist
 
-				System.out
-						.println("Enter the retailprice as a double with 2 digits after the point:");
+				System.out.println("Enter the retailprice as a double with 2 digits after the point:");
+				//Exception, wenn erst gar kein BigDecimal eingegeben wird.
 				Scanner s = new Scanner(System.in);
-				BigDecimal retailprice = s.nextBigDecimal();
+				//default
+				BigDecimal retailprice = BigDecimal.valueOf(0.00);
+				
+				try {
+					retailprice = s.nextBigDecimal();
+				} catch (Exception e) {
+					throw new SQLException("Not a BigDecimal");
+				}
+
+				if (retailprice.toString().length()>16) {
+					throw new SQLException("Too many digits");
+				}
+				
+				if(retailprice.subtract(retailprice.setScale(0, RoundingMode.FLOOR)).toString().length()!=4) {
+					throw new SQLException("Not exactly 2 decimals were entered");
+				}
+				
+				if(retailprice.compareTo(BigDecimal.valueOf(0.00))==-1) {
+					throw new LabCourseException("Retailprice can not be negativ");
+				}
+				
 
 				// Actually, we need to check the format of the double here as
 				// well.
@@ -212,7 +284,8 @@ public class Blatt06 extends Basis06 {
 				ps_partkey.setString(3, type);
 				ps_partkey.setBigDecimal(4, retailprice);
 
-				partkey = ps_partkey.executeUpdate();
+				ps_partkey.executeUpdate();
+				
 				System.out.println("Partkey for part " + name + " is: "
 						+ partkey);
 				con.commit();
@@ -224,6 +297,10 @@ public class Blatt06 extends Basis06 {
 
 			// Finally, we retrieved and/or generated the foreign keys and can
 			// set up our actual values for the query
+			//Im Fall von existing muss der Query kein INSERT sondern ein UPDATE sein.
+				// -> Alternativ zum UPDATE könnten wir auch zunächst ein DELETE des existierenden Eintrages und dann ein INSERT ausführen.
+					// -> Problem grlöst durch eingefügten DELETE auf partsupp (siehe Code oben)
+			
 			ps.setInt(1, partkey);
 			ps.setInt(2, suppkey);
 			ps.setInt(3, availqty.intValue());
@@ -244,7 +321,7 @@ public class Blatt06 extends Basis06 {
 			System.out.println("New offer with " + partkey + ", " + suppkey
 					+ ", " + availqty + ", " + supplycost
 					+ " has been added successfully.");
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -259,7 +336,9 @@ public class Blatt06 extends Basis06 {
 
 		int rs_counter = 0;
 
-		String query = "SELECT * " + "FROM customer " + "WHERE name LIKE ?;";
+		//evtl mit lower, dass Groß- und Kleinschreibung die Suche nicht mehr beeinflusst
+		String query = "SELECT * " + "FROM customer " + "WHERE lower(name) LIKE lower(?);";
+		//String query = "SELECT * " + "FROM customer " + "WHERE name LIKE ?;";
 
 		try {
 			// Load vendor-specific driver
@@ -324,9 +403,13 @@ public class Blatt06 extends Basis06 {
 	public boolean aufg_1_4(String name) throws SQLException,
 			LabCourseException {
 
+		/*
+		INSERT INTO customer VALUES
+		(100,'Testcustomer','Testadresse',1,NULL,NULL,NULL)
+		 */
 		
 
-		String query = "SELECT * " + "FROM customer " + "WHERE name LIKE ?;";
+		String query = "SELECT * " + "FROM customer " + "WHERE lower(name) LIKE lower(?);";
 
 		try {
 			// Load vendor-specific driver
@@ -353,6 +436,14 @@ public class Blatt06 extends Basis06 {
 			// Execute query
 			ResultSet rs = ps.executeQuery();
 
+			//no customer found for entered parameter
+			if (!rs.next()) {
+				//hier bin ich mir nicht sicher welche Art von Exception wir werfen sollen.
+				throw new SQLException("No customer found");
+			}
+			//Need to execute the query once again to move the cursor again to the first row
+			rs = ps.executeQuery();
+			
 			// Fetch values
 			while (rs.next()) {
 				// First Index is 1
@@ -366,6 +457,7 @@ public class Blatt06 extends Basis06 {
 			
 			
 			System.out.println("Please enter the custkey of the customer that you want to delete:");
+			//Prüfen, ob custkey auch unter den angezeigten customers ist
 			Scanner s = new Scanner(System.in);
 			int custkey = s.nextInt();
 			
@@ -376,18 +468,30 @@ public class Blatt06 extends Basis06 {
 			 * - is acctbal positive?
 			 * - is there an order for the custkey that is no
 			 */
-			double accountBalance=0;
+			
+			//Need to execute the query once again to move the cursor again to the first row
 			rs = ps.executeQuery();
+			
+			//Check if the Customer with the customerkey is in the displayed list
+			boolean inCustQueryList = false;
+			double accountBalance=0;
 			while(rs.next()){
 				if(rs.getInt(1)==custkey){
+					customer = rs.getString(2);
+					inCustQueryList = true;
 					accountBalance=rs.getDouble(7);
 				}
 			}
 			
+			if (!inCustQueryList) {
+				throw new SQLException("The entered customerkey is not related to a customer in the displayed list");
+			}
+			
 			if(accountBalance<0.00){
-				System.out.println("Account Balance is negative");
-				//Exception
-				return false;
+				//System.out.println("Account Balance is negative");
+				throw new LabCourseException("Account Balance is negative");
+				//return false;
+					// -> unreachable statement. Wie lösen wir das Problem?
 			}
 			
 			// end transaction
@@ -409,9 +513,10 @@ public class Blatt06 extends Basis06 {
 			while (rs_orders.next()) {
 
 				if (rs_orders.getString(1).equals("no")) {
-						System.out.println("There is one order for the custkey that is not ok.");
-						//Exception
-						return false;
+					//System.out.println("There is one order for the custkey that is not ok.");
+					throw new SQLException("There is one order for the custkey that is not ok");
+					//return false;
+					// -> unreachable statement. Wie lösen wir das Problem?
 				}
 			}
 			con.commit();
@@ -433,7 +538,7 @@ public class Blatt06 extends Basis06 {
 			int deletedrow = ps_delete.executeUpdate();
 			con.commit();
 			ps_delete.close();
-			System.out.println("You successfully deleted customer " + name + " with custkey " + custkey);
+			System.out.println("You successfully deleted customer " + customer + " with custkey " + custkey);
 
 			// close connection
 			con.close();
