@@ -1,10 +1,5 @@
 package de.tum.in.dbpra.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import de.tum.in.dbpra.model.bean.CustomerBean;
 
 public class CustomerDAO extends DAO{
