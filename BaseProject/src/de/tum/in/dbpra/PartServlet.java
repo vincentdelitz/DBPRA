@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import de.tum.in.dbpra.model.bean.OrderListBean;
 import de.tum.in.dbpra.model.dao.OrderDAO;
+import de.tum.in.dbpra.model.dao.PartDAO;
 
 
 /**
@@ -41,6 +42,9 @@ public class PartServlet extends HttpServlet {
 		OrderDAO od_no = new OrderDAO();
 		OrderListBean olb_no = new OrderListBean();
 		//get All Orders
+		
+		PartDAO part = new PartDAO();
+		
 
 		try {
 			od.getOkOrders(olb_ok);
