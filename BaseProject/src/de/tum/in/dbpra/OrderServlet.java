@@ -37,11 +37,14 @@ public class OrderServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		OrderDAO od = new OrderDAO();
-		OrderListBean olb = new OrderListBean();
+		OrderListBean olb_ok = new OrderListBean();
+		OrderDAO od_no = new OrderDAO();
+		OrderListBean olb_no = new OrderListBean();
 		//get All Orders
 
 		try {
-			od.getOkOrders(olb);
+			od.getOkOrders(olb_ok);
+			od_no.getNoOrders(olb_no);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,7 +52,8 @@ public class OrderServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("bean", olb);
+		request.setAttribute("bean", olb_ok);
+		request.setAttribute("bean_no", olb_no);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("exercise72.jsp");
 		dispatcher.forward(request, response);
 	}
