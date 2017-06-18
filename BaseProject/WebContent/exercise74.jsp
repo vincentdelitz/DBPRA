@@ -4,6 +4,8 @@
 	class="de.tum.in.dbpra.model.bean.OrderBean"></jsp:useBean>
 <jsp:useBean id="lineitems" scope="request"
 	class="de.tum.in.dbpra.model.bean.LineitemListBean"></jsp:useBean>
+<jsp:useBean id="customer" scope="request"
+	class="de.tum.in.dbpra.model.bean.CustomerBean"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,7 +38,7 @@
 		<table border frame=void style="width: 50%">
 			<tr>
 				<th>Information about the customer</th>
-				<td>order.getCustkey().getName()</td>
+				<td><%=customer.getName()%></td>
 			</tr>
 			<tr>
 				<th>Number of invoice form</th>
