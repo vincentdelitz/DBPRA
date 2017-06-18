@@ -13,6 +13,11 @@
 
 </head>
 
+Linklist
+<ul>
+	<li><a href="/BaseProject">Home</a></li>
+</ul>
+
 <div class="content container">
 
 	<%
