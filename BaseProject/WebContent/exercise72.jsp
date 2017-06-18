@@ -13,6 +13,8 @@
 
 </head>
 
+<a href="./exercise71.html">Back to exercise71.html</a>
+
 <div class="content container">
 
 	<%
