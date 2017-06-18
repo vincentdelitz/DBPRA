@@ -47,7 +47,7 @@
 			%>
 			<tr>
 
-				<td><%=bean.getChild(i).getOrderkey()%></td>
+				<td><a href="./invoiceform"><%=bean.getChild(i).getOrderkey()%></a></td>
 				<td><%=bean.getChild(i).getCustkey()%></td>
 				<td><%=bean.getChild(i).getOrderstatus()%></td>
 				<td><%=bean.getChild(i).getTotalprice()%></td>
@@ -80,7 +80,7 @@
 			%>
 			<tr>
 
-				<td><%=bean_no.getChild(i).getOrderkey()%></td>
+				<td><a href="./invoiceform"><%=bean.getChild(i).getOrderkey()%></a></td>
 				<td><%=bean_no.getChild(i).getCustkey()%></td>
 				<td><%=bean_no.getChild(i).getOrderstatus()%></td>
 				<td><%=bean_no.getChild(i).getTotalprice()%></td>
