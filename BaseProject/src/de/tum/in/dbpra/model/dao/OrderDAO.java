@@ -11,7 +11,7 @@ import de.tum.in.dbpra.model.bean.OrderListBean;
 public class OrderDAO extends DAO{
 	public void getOkOrders(OrderListBean orderlist) throws SQLException, ClassNotFoundException {
 		
-		String query = "SELECT * FROM orders WHERE orderstatus = 'ok';";
+		String query = "SELECT * FROM orders WHERE orderstatus = 'ok';";	
 		
 		Connection con = getConnection();
 		
@@ -51,6 +51,7 @@ public class OrderDAO extends DAO{
 		
 		while(rs.next()) {
 			OrderBean order = new OrderBean();
+			order.setOrderkey(rs.getInt("orderkey"));
 			order.setCustkey(rs.getInt("custkey"));
 			order.setOrderstatus(rs.getString("orderstatus"));
 			order.setTotalprice(rs.getDouble("totalprice"));

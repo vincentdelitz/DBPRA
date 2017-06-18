@@ -44,16 +44,20 @@ public class OrderServlet extends HttpServlet {
 
 		try {
 			od.getOkOrders(olb_ok);
-			od_no.getNoOrders(olb_no);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			od_no.getNoOrders(olb_no);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+
 		request.setAttribute("bean", olb_ok);
-		request.setAttribute("bean_no", olb_no);
+		request.setAttribute("bean_no", olb_no);	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("exercise72.jsp");
 		dispatcher.forward(request, response);
 	}

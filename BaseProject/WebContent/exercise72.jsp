@@ -60,18 +60,6 @@
 
 <div class="content container">
 
-	<%
-		if (request.getAttribute("error") != null) {
-	%>
-	<div class="box">
-
-		<h1>An error occured!</h1>
-		<%=request.getAttribute("error")%>
-	</div>
-	<%
-		} 
-			
-	%>
 	<h1>All Orders that are NOT ok</h1>
 	
 
@@ -103,8 +91,5 @@
 	</div>
 </div>
 
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </body>
 </html>
