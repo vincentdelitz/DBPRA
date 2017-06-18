@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="bean" scope="request"
-	class="de.tum.in.dbpra.model.bean.OrderListBean"></jsp:useBean>
+<jsp:useBean id="order" scope="request"
+	class="de.tum.in.dbpra.model.bean.OrderBean"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,40 +34,29 @@ Das ist Exercise 7.4
 		<table border frame=void style="width: 50%">
 			<tr>
 				<th>Information about the customer</th>
-				<th><%=bean.getName()%></th>
+				<th>order.getCustkey().getName()</th>
 			</tr>
 			<tr>
 				<th>Number of invoice form</th>
-				<th><%=bean.getOrderkey()%></th>
+				<th><%=order.getOrderkey()%></th>
 			</tr>
 			<tr>
 				<th>Date</th>
-				<th>18-06-2017</th>
+				<th><%=order.getOrderdate()%></th>
 			</tr>
 			<tr>
 				<th>Number of customer</th>
-				<th><%=bean.getCustkey()%></th>
+				<th><%=order.getCustkey()%></th>
 			</tr>
 			<tr>
 				<th>Table with all order items</th>
-				<th>Custkey</th>
+				<th>Lineitemtable</th>
 			</tr>
 			<tr>
 				<th>Lump sum price</th>
-				<th>Custkey</th>
+				<th><%=order.getTotalprice()%></th>
 			</tr>
 
-			<tr>
-
-				
-				<td><%=bean.getChild(i).getCustkey()%></td>
-				<td><%=bean.getChild(i).getOrderstatus()%></td>
-				<td><%=bean.getChild(i).getTotalprice()%></td>
-				<td><%=bean.getChild(i).getOrderdate()%></td>
-			</tr>
-			<%
-				}
-			%>
 		</table>
 	</div>
 </div>

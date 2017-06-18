@@ -1,6 +1,7 @@
 package de.tum.in.dbpra;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,9 +15,6 @@ import de.tum.in.dbpra.model.bean.OrderBean;
 import de.tum.in.dbpra.model.dao.CustomerDAO;
 import de.tum.in.dbpra.model.dao.OrderDAO;
 
-/**
- * Servlet implementation class CustomerServlet
- */
 @WebServlet("/invoiceform")
 public class InvoiceFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,13 +26,26 @@ public class InvoiceFormServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    //testkommentar
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/CustomerSearch.jsp");
+		
+		OrderDAO dao = new OrderDAO();
+    	OrderBean order = new OrderBean();
+    	order.setOrderkey(Integer.parseInt(request.getParameter("orderkey")));
+    	try {
+			dao.getOrderById(order);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	request.setAttribute("order", order);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/exercise74.jsp");
 		dispatcher.forward(request, response);
 }
 
@@ -42,18 +53,8 @@ public class InvoiceFormServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-        	OrderDAO dao = new OrderDAO();
-        	OrderBean order = new OrderBean();
-        	order.setOrderkey(Integer.parseInt(request.getParameter("orderkey")));
-        	dao.getOrderById(order);
-        	request.setAttribute("order", order);
-    	} catch (Throwable e) {
-    		e.printStackTrace();
-    		request.setAttribute("error", e.toString() + e.getMessage());
-    	}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/exercise74.jsp");
-		dispatcher.forward(request, response);
+		
+
 		
 	}
 
