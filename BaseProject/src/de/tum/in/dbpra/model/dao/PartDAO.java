@@ -40,4 +40,46 @@ public class PartDAO extends DAO{
 		
 	}
 	
+	
+public void getPartsSearch(PartListBean partlist, String column, String matchType, String searchparam) throws SQLException, ClassNotFoundException {
+		
+		String query = "SELECT * FROM part WHERE " +column+ " " +matchType+ " ? ORDER BY name ASC";	
+		
+		Connection con = getConnection();
+		
+		
+		PreparedStatement pstmt = con.prepareStatement(query);
+		
+		if(column.equals("partkey")) {
+			pstmt.setInt(1, Integer.parseInt(searchparam));
+		} else if(column.equals("name")) {
+			pstmt.setString(1, searchparam);
+		} else if(column.equals("size")) {
+			pstmt.setInt(1, Integer.parseInt(searchparam));
+		} else if(column.equals("container")) {
+			pstmt.setInt(1, Integer.parseInt(searchparam));
+		} /*else if(column.equals("retailprice")) {
+			pstmt.setDouble(1, part.getRetailprice());
+		}*/
+		
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			PartBean part = new PartBean();
+			part.setPartkey(rs.getInt("partkey"));
+			part.setName(rs.getString("name"));
+			part.setSize(rs.getInt("size"));
+			part.setContainer(rs.getInt("container"));
+			part.setRetailprice(rs.getInt("retailprice"));
+			partlist.setChild(part);
+		} 
+		
+		con.commit();
+		rs.close();
+		pstmt.close();
+		con.close();
+		
+	}
+	
 }

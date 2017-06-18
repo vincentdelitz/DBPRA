@@ -47,6 +47,14 @@ public class PartServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		/*
+		try {
+			part.getPartsSearch(partlist, request.getParameter("selectcolumn"), request.getParameter("searchtype"), request.getParameter("searchparameter"));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 
 		request.setAttribute("bean", partlist);	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("exercise73.jsp");
