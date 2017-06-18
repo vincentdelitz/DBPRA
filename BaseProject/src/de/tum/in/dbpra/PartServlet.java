@@ -19,7 +19,7 @@ import de.tum.in.dbpra.model.dao.PartDAO;
 /**
  * Servlet implementation class CustomerServlet
  */
-@WebServlet("/order")
+@WebServlet("/part")
 public class PartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
