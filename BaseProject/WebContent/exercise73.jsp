@@ -18,6 +18,8 @@
 <form>
   Search:<br>
   <input type="text" name="searchparameter"><br>
+ <br/>
+	<input type="submit" value="search" />
 </form>
 
 <form>
@@ -28,6 +30,27 @@
 		<label for="vi"> Like Match</label><br>
 	</fieldset>
 </form>
+
+<form method="POST">
+<b>Column:</b>
+	<select name="selectcolumn" size="2" multiple>
+		<option value="partkey">Partkey</option>
+		<option value="name">Name</option>
+		<option value="size">Size</option>
+		<option value="container">Container</option>
+		<option value="retailprice">Retailprice</option>
+	</select>
+</form>
+
+<div>
+	<%
+		if("test".equals(request.getParameter("searchparameter"))) {
+	%>
+		<p>Test was successful.</p>
+	<%
+		}
+	%>
+</div>
 
 <div class="content container">
 
