@@ -3,8 +3,11 @@
  */
 package de.tum.in.dbpra.model.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import de.tum.in.dbpra.Config;
-import de.tum.in.dbpra.Config.Database;
 
 /**
  * @author Michael Schwarz

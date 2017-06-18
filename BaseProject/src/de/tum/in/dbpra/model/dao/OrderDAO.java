@@ -1,9 +1,15 @@
 package de.tum.in.dbpra.model.dao;
 
-import de.tum.in.dbpra.model.bean.CustomerBean;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import de.tum.in.dbpra.model.bean.OrderBean;
+import de.tum.in.dbpra.model.bean.OrderListBean;
 
 public class OrderDAO extends DAO{
-	public void getOkOrders(OrderBean order) throws SQLException, ClassNotFoundException {
+	public void getOkOrders(OrderListBean orderlist) throws SQLException, ClassNotFoundException {
 		
 		String query = "SELECT * FROM orders WHERE status = 'ok';";
 		
@@ -14,22 +20,23 @@ public class OrderDAO extends DAO{
 		
 		ResultSet rs = pstmt.executeQuery();
 		
-		if(rs.next()) {
-			order.setCustkey(rs.getInteger("custkey"));
+		while(rs.next()) {
+			OrderBean order = new OrderBean();
+			order.setCustkey(rs.getInt("custkey"));
 			order.setOrderstatus(rs.getString("orderstatus"));
 			order.setTotalprice(rs.getDouble("totalprice"));
 			order.setOrderdate(rs.getString("orderdate"));
-		} else {
-			
-		}
+			orderlist.setChild(order);
+		} 
 		
+		con.commit();
 		rs.close();
 		pstmt.close();
 		con.close();
 		
 	}
 	
-	public void getNoOrders(OrderBean order) throws SQLException, ClassNotFoundException {
+	public void getNoOrders(OrderListBean orderlist) throws SQLException, ClassNotFoundException {
 		
 		String query = "SELECT * FROM orders WHERE status = 'No';";
 		
@@ -41,15 +48,16 @@ public class OrderDAO extends DAO{
 		
 		ResultSet rs = pstmt.executeQuery();
 		
-		if(rs.next()) {
-			order.setCustkey(rs.getInteger("custkey"));
+		while(rs.next()) {
+			OrderBean order = new OrderBean();
+			order.setCustkey(rs.getInt("custkey"));
 			order.setOrderstatus(rs.getString("orderstatus"));
 			order.setTotalprice(rs.getDouble("totalprice"));
 			order.setOrderdate(rs.getString("orderdate"));
-		} else {
-			
-		}
+			orderlist.setChild(order);
+		} 
 		
+		con.commit();
 		rs.close();
 		pstmt.close();
 		con.close();
