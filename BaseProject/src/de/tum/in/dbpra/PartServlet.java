@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.tum.in.dbpra.model.bean.OrderListBean;
+import de.tum.in.dbpra.model.bean.PartListBean;
 import de.tum.in.dbpra.model.dao.OrderDAO;
 import de.tum.in.dbpra.model.dao.PartDAO;
 
@@ -18,7 +19,7 @@ import de.tum.in.dbpra.model.dao.PartDAO;
 /**
  * Servlet implementation class CustomerServlet
  */
-@WebServlet("/order")
+@WebServlet("/part")
 public class PartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,32 +38,18 @@ public class PartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		OrderDAO od = new OrderDAO();
-		OrderListBean olb_ok = new OrderListBean();
-		OrderDAO od_no = new OrderDAO();
-		OrderListBean olb_no = new OrderListBean();
-		//get All Orders
-		
 		PartDAO part = new PartDAO();
-		
+		PartListBean partlist = new PartListBean();
 
 		try {
-			od.getOkOrders(olb_ok);
+			part.getParts(partlist);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			od_no.getNoOrders(olb_no);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		
 
-		request.setAttribute("bean", olb_ok);
-		request.setAttribute("bean_no", olb_no);	
-		RequestDispatcher dispatcher = request.getRequestDispatcher("exercise72.jsp");
+		request.setAttribute("bean", partlist);	
+		RequestDispatcher dispatcher = request.getRequestDispatcher("exercise73.jsp");
 		dispatcher.forward(request, response);
 	}
 	
