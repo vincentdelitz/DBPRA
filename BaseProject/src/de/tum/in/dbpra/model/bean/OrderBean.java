@@ -3,6 +3,7 @@ package de.tum.in.dbpra.model.bean;
 public class OrderBean {
 	private int orderkey;
 	private int custkey;
+	private String orderstatus;
 	private double totalprice;
 	private String orderdate;
 
@@ -47,6 +48,16 @@ public class OrderBean {
 
 	public void setOrderdate(String orderdate) {
 		this.orderdate = orderdate;
+	}
+
+
+	public String getOrderstatus() {
+		return orderstatus;
+	}
+
+
+	public void setOrderstatus(String orderstatus) {
+		this.orderstatus = orderstatus;
 	}
 	
 
