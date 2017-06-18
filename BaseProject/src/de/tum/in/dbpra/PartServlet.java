@@ -48,7 +48,7 @@ public class PartServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("bean", part);	
+		request.setAttribute("bean", partlist);	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("exercise73.jsp");
 		dispatcher.forward(request, response);
 	}
