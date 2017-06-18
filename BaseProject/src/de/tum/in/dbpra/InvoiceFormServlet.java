@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import de.tum.in.dbpra.model.bean.CustomerBean;
+import de.tum.in.dbpra.model.bean.LineitemListBean;
 import de.tum.in.dbpra.model.bean.OrderBean;
-import de.tum.in.dbpra.model.dao.CustomerDAO;
+import de.tum.in.dbpra.model.dao.LineitemDAO;
 import de.tum.in.dbpra.model.dao.OrderDAO;
 
 @WebServlet("/invoiceform")
@@ -35,6 +35,11 @@ public class InvoiceFormServlet extends HttpServlet {
 		OrderDAO dao = new OrderDAO();
     	OrderBean order = new OrderBean();
     	order.setOrderkey(Integer.parseInt(request.getParameter("orderkey")));
+    	
+    	LineitemDAO ld = new LineitemDAO();
+    	LineitemListBean llb = new LineitemListBean();
+
+    	
     	try {
 			dao.getOrderById(order);
 		} catch (ClassNotFoundException e) {
@@ -44,7 +49,20 @@ public class InvoiceFormServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
+    	
+    	try {
+			ld.getLineitemsByOrderkey(order,llb);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
     	request.setAttribute("order", order);
+    	request.setAttribute("lineitems",llb);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/exercise74.jsp");
 		dispatcher.forward(request, response);
 }
