@@ -26,6 +26,7 @@ public class CustomerServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    //testkommentar
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
