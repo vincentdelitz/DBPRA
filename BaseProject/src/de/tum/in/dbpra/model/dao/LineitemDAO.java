@@ -23,11 +23,9 @@ public class LineitemDAO extends DAO{
 		
 		if(rs.next()) {
 			lineitem.setLinenumber(rs.getInt("linenumber"));
-			lineitem.setPartkey(rs.getString("partkey"));
+			lineitem.setPartkey(rs.getInt("partkey"));
 			lineitem.setQuantity(rs.getInt("quantity"));
 			lineitem.setExtendedprice(rs.getDouble("extendedprice"));
-		} else {
-			throw new CustomerNotFoundException("There is no Lineitem with id " + lineitem.getOrderkey() + "!");
 		}
 		
 		rs.close();

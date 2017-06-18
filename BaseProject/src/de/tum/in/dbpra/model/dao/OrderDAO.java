@@ -66,5 +66,29 @@ public class OrderDAO extends DAO{
 		
 	}
 	
+	public void getOrderById(OrderBean order) throws ClassNotFoundException, SQLException{
+		
+		String query = "SELECT * FROM orders WHERE orderkey = ?;";
+		
+		Connection con = getConnection();
+		
+		PreparedStatement pstmt = con.prepareStatement(query);
+		
+		pstmt.setInt(1, order.getOrderkey());
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			order.setCustkey(rs.getInt("custkey"));
+			order.setOrderstatus(rs.getString("orderstatus"));
+			order.setTotalprice(rs.getDouble("totalprice"));
+			order.setOrderdate(rs.getString("orderdate"));
+		} 
+		
+		rs.close();
+		pstmt.close();
+		con.close();
+	}
+	
 	
 }
