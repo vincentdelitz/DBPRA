@@ -33,7 +33,7 @@ public class LineitemDAO extends DAO {
 			lineitem.setExtendedprice(rs.getDouble("extendedprice"));
 			lineitemList.setChild(lineitem);
 		}
-
+		
 		con.commit();
 		rs.close();
 		pstmt.close();
