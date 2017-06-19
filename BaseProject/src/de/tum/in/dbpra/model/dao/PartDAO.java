@@ -29,7 +29,7 @@ public class PartDAO extends DAO{
 			part.setName(rs.getString("name"));
 			part.setSize(rs.getInt("size"));
 			part.setContainer(rs.getInt("container"));
-			part.setRetailprice(rs.getInt("retailprice"));
+			part.setRetailprice(rs.getDouble("retailprice"));
 			partlist.setChild(part);
 		} 
 		
@@ -114,7 +114,7 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 			part.setType(rs.getString("type"));
 			part.setSize(rs.getInt("size"));
 			part.setContainer(rs.getInt("container"));
-			part.setRetailprice(rs.getInt("retailprice"));
+			part.setRetailprice(rs.getDouble("retailprice"));
 			part.setMatch(rs.getInt("match"));
 			partlist.setChild(part);
 		} 

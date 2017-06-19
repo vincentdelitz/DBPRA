@@ -37,7 +37,7 @@
 		<input type="radio" id="container" name="selectcolumn" value="container">
 		<label for="mc"> Container</label><br>
 		<input type="radio" id="retailprice" name="selectcolumn" value="retailprice">
-		<label for="mc"> Retailprice</label><br>
+		<label for="mc"> Retailprice (entering decimal is necessary)</label><br>
 	</fieldset>
 	<input type="submit" value="search" />
 </form>
