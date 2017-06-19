@@ -19,19 +19,32 @@
   Search:<br>
   <input type="text" name="searchparameter"><br>
  <br/>
+	<fieldset>
+		<input type="radio" id="ex" name="searchtype" value="exact" checked>
+		<label for="mc"> Exact Match</label><br>
+		<input type="radio" id="li" name="searchtype" value="like">
+		<label for="vi"> Like Match (only possible for 'Name' and 'Type')</label><br>
+	</fieldset>
+	<fieldset>
+		<input type="radio" id="partkey" name="selectcolumn" value="partkey" checked>
+		<label for="mc"> Partkey</label><br>
+		<input type="radio" id="name" name="selectcolumn" value="name">
+		<label for="mc"> Name</label><br>
+		<input type="radio" id="type" name="selectcolumn" value="type">
+		<label for="mc"> Type</label><br>
+		<input type="radio" id="size" name="selectcolumn" value="size">
+		<label for="mc"> Size</label><br>
+		<input type="radio" id="container" name="selectcolumn" value="container">
+		<label for="mc"> Container</label><br>
+		<input type="radio" id="retailprice" name="selectcolumn" value="retailprice">
+		<label for="mc"> Retailprice</label><br>
+	</fieldset>
 	<input type="submit" value="search" />
 </form>
 
-<form>
-	<fieldset>
-		<input type="radio" id="ex" name="searchtype" value="=" checked>
-		<label for="mc"> Exact Match</label><br>
-		<input type="radio" id="li" name="searchtype" value="like">
-		<label for="vi"> Like Match</label><br>
-	</fieldset>
-</form>
 
-<form method="POST">
+
+<!--form method="POST">
 <b>Column:</b>
 	<select name="selectcolumn" size="2" multiple>
 		<option value="partkey">Partkey</option>
@@ -40,17 +53,8 @@
 		<option value="container">Container</option>
 		<option value="retailprice">Retailprice</option>
 	</select>
-</form>
-
-<div>
-	<%
-		if("test".equals(request.getParameter("searchparameter"))) {
-	%>
-		<p>Test was successful.</p>
-	<%
-		}
-	%>
-</div>
+	<input type="submit" value="search" />
+</form-->
 
 <div class="content container">
 

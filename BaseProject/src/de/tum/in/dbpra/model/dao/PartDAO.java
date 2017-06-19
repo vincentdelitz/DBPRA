@@ -43,31 +43,59 @@ public class PartDAO extends DAO{
 	
 public void getPartsSearch(PartListBean partlist, String column, String matchType, String searchparam) throws SQLException, ClassNotFoundException {
 		
-		String query = "SELECT * FROM part WHERE " +column+ " " +matchType+ " ? ORDER BY name ASC";	
+		String query = "SELECT *, 0 AS \"match\" FROM part ORDER BY name ASC";
+		boolean correctsearch = true;
+		boolean likesearch = false;
 		
-		if(matchType.equals("like")) {
-			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" LIKE '%?%') THEN 1 ELSE 0 END AS \"match\" FROM part";
+		if(column!=null) {
+			if(!(column.equals("name") || column.equals("type"))) {
+				matchType = "exact";
+			}
+		}
+	
+		if(column==null || matchType==null || searchparam==null) {
+			query = "SELECT *, 0 AS \"match\" FROM part ORDER BY name ASC";
+			correctsearch = false;
+		} else if(matchType.equals("like")) {
+			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" LIKE ?) THEN 1 ELSE 0 END AS \"match\" FROM part";
+			likesearch = true;
 		} else {
 			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" = ?) THEN 1 ELSE 0 END AS \"match\" FROM part";
 		}
-		Connection con = getConnection();
 		
+		Connection con = getConnection();
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
 		
-		if(column.equals("partkey")) {
-			pstmt.setInt(1, Integer.parseInt(searchparam));
-		} else if(column.equals("name")) {
-			pstmt.setString(1, searchparam);
-		} else if(column.equals("type")) {
-			pstmt.setString(1, searchparam);
-		} else if(column.equals("size")) {
-			pstmt.setInt(1, Integer.parseInt(searchparam));
-		} else if(column.equals("container")) {
-			pstmt.setInt(1, Integer.parseInt(searchparam));
-		} /*else if(column.equals("retailprice")) {
-			pstmt.setDouble(1, part.getRetailprice());
-		}*/
+		if(correctsearch && likesearch) {
+			if(column.equals("partkey")) {
+				pstmt.setInt(1, Integer.parseInt(searchparam));
+			} else if(column.equals("name")) {
+				pstmt.setString(1, "%" +searchparam+ "%");
+			} else if(column.equals("type")) {
+				pstmt.setString(1, "%" +searchparam+ "%");
+			} else if(column.equals("size")) {
+				pstmt.setInt(1, Integer.parseInt(searchparam));
+			} else if(column.equals("container")) {
+				pstmt.setInt(1, Integer.parseInt(searchparam));
+			} else if(column.equals("retailprice")) {
+				pstmt.setDouble(1, Double.parseDouble(searchparam));
+			}
+		} else if(correctsearch) {
+			if(column.equals("partkey")) {
+				pstmt.setInt(1, Integer.parseInt(searchparam));
+			} else if(column.equals("name")) {
+				pstmt.setString(1, searchparam);
+			} else if(column.equals("type")) {
+				pstmt.setString(1, searchparam);
+			} else if(column.equals("size")) {
+				pstmt.setInt(1, Integer.parseInt(searchparam));
+			} else if(column.equals("container")) {
+				pstmt.setInt(1, Integer.parseInt(searchparam));
+			} else if(column.equals("retailprice")) {
+				pstmt.setDouble(1, Double.parseDouble(searchparam));
+			}
+		}
 		
 		
 		ResultSet rs = pstmt.executeQuery();
