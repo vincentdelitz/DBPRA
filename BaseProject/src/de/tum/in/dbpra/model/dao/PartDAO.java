@@ -14,7 +14,8 @@ public class PartDAO extends DAO{
 	
 	public void getParts(PartListBean partlist) throws SQLException, ClassNotFoundException {
 		
-		String query = "SELECT * FROM part ORDER BY name ASC";	
+		String query = "SELECT partkey, COALESCE(name, \"\") AS name, COALESCE(\"type\", \"\") AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice" +
+				" FROM part ORDER BY name ASC";	
 		
 		Connection con = getConnection();
 		
@@ -49,7 +50,8 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 			orderparam += " ,partkey";
 		}
 	
-		String query = "SELECT *, 0 AS \"match\" FROM part ORDER BY " +orderparam;
+		String query = "SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice" +
+				", 0 AS \"match\" FROM part ORDER BY " +orderparam;
 		boolean correctsearch = true;
 		boolean likesearch = false;
 		
@@ -60,13 +62,24 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 		}
 	
 		if(column==null || matchType==null || searchparam==null) {
-			query = "SELECT *, 0 AS \"match\" FROM part ORDER BY " +orderparam;
+			query = "SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice" +
+					", 0 AS \"match\" FROM part ORDER BY " +orderparam;
 			correctsearch = false;
 		} else if(matchType.equals("like")) {
-			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" LIKE ?) THEN 1 ELSE 0 END AS \"match\" FROM part ORDER BY " +orderparam;
+			query = "SELECT * " +
+					", CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM (SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice FROM part) TMP1 WHERE \"" +column+ "\" LIKE ?) THEN 1 ELSE 0 END AS \"match\" " +
+							"FROM (SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice FROM part) TMP2 ORDER BY " +orderparam;
+			
+			/*query = "SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice" +
+					", CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" LIKE ?) THEN 1 ELSE 0 END AS \"match\" FROM part ORDER BY " +orderparam;*/
 			likesearch = true;
 		} else {
-			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" = ?) THEN 1 ELSE 0 END AS \"match\" FROM part ORDER BY " +orderparam;
+			query = "SELECT * " +
+					", CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM (SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice FROM part) TMP1 WHERE \"" +column+ "\" = ?) THEN 1 ELSE 0 END AS \"match\" " +
+							"FROM (SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice FROM part) TMP2 ORDER BY " +orderparam;
+			
+			/*query = "SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice" +
+					", CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" = ?) THEN 1 ELSE 0 END AS \"match\" FROM part ORDER BY " +orderparam;*/
 		}
 		
 		Connection con = getConnection();
