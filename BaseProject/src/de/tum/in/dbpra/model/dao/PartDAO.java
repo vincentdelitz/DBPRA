@@ -41,9 +41,15 @@ public class PartDAO extends DAO{
 	}
 	
 	
-public void getPartsSearch(PartListBean partlist, String column, String matchType, String searchparam) throws SQLException, ClassNotFoundException {
+public void getPartsSearch(PartListBean partlist, String column, String matchType, String searchparam, String orderparam) throws SQLException, ClassNotFoundException {
 		
-		String query = "SELECT *, 0 AS \"match\" FROM part ORDER BY name ASC";
+		if(orderparam==null) {
+			orderparam = "partkey";
+		} else if(!orderparam.equals("partkey")) {
+			orderparam += " ,partkey";
+		}
+	
+		String query = "SELECT *, 0 AS \"match\" FROM part ORDER BY " +orderparam;
 		boolean correctsearch = true;
 		boolean likesearch = false;
 		
@@ -54,13 +60,13 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 		}
 	
 		if(column==null || matchType==null || searchparam==null) {
-			query = "SELECT *, 0 AS \"match\" FROM part ORDER BY name ASC";
+			query = "SELECT *, 0 AS \"match\" FROM part ORDER BY " +orderparam;
 			correctsearch = false;
 		} else if(matchType.equals("like")) {
-			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" LIKE ?) THEN 1 ELSE 0 END AS \"match\" FROM part";
+			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" LIKE ?) THEN 1 ELSE 0 END AS \"match\" FROM part ORDER BY " +orderparam;
 			likesearch = true;
 		} else {
-			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" = ?) THEN 1 ELSE 0 END AS \"match\" FROM part";
+			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" = ?) THEN 1 ELSE 0 END AS \"match\" FROM part ORDER BY " +orderparam;
 		}
 		
 		Connection con = getConnection();
@@ -98,7 +104,7 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 				}
 			}
 		} catch(Exception e) {
-			query = "SELECT *, 0 AS \"match\" FROM part ORDER BY name ASC";
+			query = "SELECT *, 0 AS \"match\" FROM part ORDER BY " +orderparam;
 			con = getConnection();
 			pstmt = con.prepareStatement(query);
 		}

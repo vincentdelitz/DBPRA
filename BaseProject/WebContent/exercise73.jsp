@@ -76,12 +76,12 @@
 	<div class="box">
 		<table border frame=void style="width: 100%">
 			<tr>
-				<th>Partkey</th>
-				<th>Name</th>
-				<th>Type</th>
-				<th>Size</th>
-				<th>Container</th>
-				<th>Retailprice</th>
+				<th><a href="./part?ordercolumn=partkey">Partkey</a></th>
+				<th><a href="./part?ordercolumn=name">Name</a></th>
+				<th><a href="./part?ordercolumn=type">Type</a></th>
+				<th><a href="./part?ordercolumn=size">Size</a></th>
+				<th><a href="./part?ordercolumn=container">Container</a></th>
+				<th><a href="./part?ordercolumn=retailprice">Retailprice</a></th>
 				<th>Match</th>
 
 			</tr>
