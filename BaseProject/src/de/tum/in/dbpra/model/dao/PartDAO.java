@@ -59,6 +59,8 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 			pstmt.setInt(1, Integer.parseInt(searchparam));
 		} else if(column.equals("name")) {
 			pstmt.setString(1, searchparam);
+		} else if(column.equals("type")) {
+			pstmt.setString(1, searchparam);
 		} else if(column.equals("size")) {
 			pstmt.setInt(1, Integer.parseInt(searchparam));
 		} else if(column.equals("container")) {
@@ -74,6 +76,7 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 			PartBean part = new PartBean();
 			part.setPartkey(rs.getInt("partkey"));
 			part.setName(rs.getString("name"));
+			part.setType(rs.getString("type"));
 			part.setSize(rs.getInt("size"));
 			part.setContainer(rs.getInt("container"));
 			part.setRetailprice(rs.getInt("retailprice"));

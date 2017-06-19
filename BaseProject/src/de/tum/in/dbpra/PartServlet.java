@@ -52,7 +52,7 @@ public class PartServlet extends HttpServlet {
 		
 		try {
 			//partsearch.getPartsSearch(partlistsearch, request.getParameter("selectcolumn"), request.getParameter("searchtype"), request.getParameter("searchparameter"));
-			partsearch.getPartsSearch(partlistsearch, "partkey", "=", "4");
+			partsearch.getPartsSearch(partlistsearch, "partkey", "exact", "4");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

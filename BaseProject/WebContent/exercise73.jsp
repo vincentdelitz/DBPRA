@@ -74,23 +74,44 @@
 			<tr>
 				<th>Partkey</th>
 				<th>Name</th>
+				<th>Type</th>
 				<th>Size</th>
 				<th>Container</th>
 				<th>Retailprice</th>
+				<th>Match</th>
 
 			</tr>
 			<%
 				for (int i = 0; i < beansearch.getList().size(); i++) {
 			%>
+			<%
+					if(beansearch.getChild(i).getMatch()==1) {
+			%>
+			<tr>
+
+				<td style="font-weight:bold"><%=beansearch.getChild(i).getPartkey()%></td>
+				<td style="font-weight:bold"><%=beansearch.getChild(i).getName()%></td>
+				<td style="font-weight:bold"><%=beansearch.getChild(i).getType()%></td>
+				<td style="font-weight:bold"><%=beansearch.getChild(i).getSize()%></td>
+				<td style="font-weight:bold"><%=beansearch.getChild(i).getContainer()%></td>
+				<td style="font-weight:bold"><%=beansearch.getChild(i).getRetailprice()%></td>
+				<td style="font-weight:bold"><%=beansearch.getChild(i).getMatch()%></td>
+			</tr>
+			<%
+					} else {
+			%>
 			<tr>
 
 				<td><%=beansearch.getChild(i).getPartkey()%></td>
 				<td><%=beansearch.getChild(i).getName()%></td>
+				<td><%=beansearch.getChild(i).getType()%></td>
 				<td><%=beansearch.getChild(i).getSize()%></td>
 				<td><%=beansearch.getChild(i).getContainer()%></td>
 				<td><%=beansearch.getChild(i).getRetailprice()%></td>
+				<td><%=beansearch.getChild(i).getMatch()%></td>
 			</tr>
 			<%
+					}
 				}
 			%>
 		</table>
