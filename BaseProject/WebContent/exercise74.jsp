@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="order" scope="request"
 	class="de.tum.in.dbpra.model.bean.OrderBean"></jsp:useBean>
+<jsp:useBean id="lineitems" scope="request"
+	class="de.tum.in.dbpra.model.bean.LineitemListBean"></jsp:useBean>
+<jsp:useBean id="customer" scope="request"
+	class="de.tum.in.dbpra.model.bean.CustomerBean"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +14,7 @@
 <title>Exercise 7.2</title>
 
 </head>
-Das ist Exercise 7.4
+
 </br>
 <a href="./exercise71.html">Back to exercise71.html</a>
 <div class="content container">
@@ -34,30 +38,54 @@ Das ist Exercise 7.4
 		<table border frame=void style="width: 50%">
 			<tr>
 				<th>Information about the customer</th>
-				<th>order.getCustkey().getName()</th>
+				<td><%=customer.getName()%></td>
 			</tr>
 			<tr>
 				<th>Number of invoice form</th>
-				<th><%=order.getOrderkey()%></th>
+				<td><%=order.getOrderkey()%></td>
 			</tr>
 			<tr>
 				<th>Date</th>
-				<th><%=order.getOrderdate()%></th>
+				<td><%=order.getOrderdate()%></td>
 			</tr>
 			<tr>
 				<th>Number of customer</th>
-				<th><%=order.getCustkey()%></th>
-			</tr>
-			<tr>
-				<th>Table with all order items</th>
-				<th>Lineitemtable</th>
+				<td><%=order.getCustkey()%></td>
 			</tr>
 			<tr>
 				<th>Lump sum price</th>
-				<th><%=order.getTotalprice()%></th>
+				<td><%=order.getTotalprice()%></td>
 			</tr>
+</table>
+			Table with all order items
+			<table border frame=void >
+<tr>				
+				<th>Linenumber</th>
+				<th>Partkey</th>
+				<th>Quantity</th>
+				<th>Extendedprice</th>
+</tr>
 
-		</table>
+				
+
+			<%
+				for (int i = 0; i < lineitems.getList().size(); i++) {
+			%>
+			<tr>
+
+				<td><%=lineitems.getChild(i).getLinenumber()%></td>
+				<td><%=lineitems.getChild(i).getPartkey()%></td>
+				<td><%=lineitems.getChild(i).getQuantity()%></td>
+				<td><%=lineitems.getChild(i).getExtendedprice()%></td>
+				
+			</tr>
+			<%
+				}
+			%>
+			</table>
+			
+
+		
 	</div>
 </div>
 

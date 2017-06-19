@@ -80,7 +80,7 @@
 			%>
 			<tr>
 
-				<td><form method="get"><a href="./invoiceform"><%=bean_no.getChild(i).getOrderkey()%></a></form></td>
+				<td><a href="./invoiceform?orderkey=<%=bean_no.getChild(i).getOrderkey()%>"><%=bean_no.getChild(i).getOrderkey()%></a></td>
 				<td><%=bean_no.getChild(i).getCustkey()%></td>
 				<td><%=bean_no.getChild(i).getOrderstatus()%></td>
 				<td><%=bean_no.getChild(i).getTotalprice()%></td>
