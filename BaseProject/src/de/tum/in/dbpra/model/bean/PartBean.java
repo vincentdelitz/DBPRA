@@ -7,6 +7,7 @@ public class PartBean {
 	private int size;
 	private int container;
 	private double retailprice;
+	private int match;
 
 	
 	public PartBean() {}
@@ -16,26 +17,21 @@ public class PartBean {
 		return partkey;
 	}
 
-
 	public void setPartkey(int partkey) {
 		this.partkey = partkey;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public String getType() {
 		return type;
 	}
-
 
 	public void setType(String type) {
 		this.type = type;
@@ -45,7 +41,6 @@ public class PartBean {
 		return size;
 	}
 
-
 	public void setSize(int size) {
 		this.size = size;
 	}
@@ -53,7 +48,6 @@ public class PartBean {
 	public int getContainer() {
 		return container;
 	}
-
 
 	public void setContainer(int container) {
 		this.container = container;
@@ -63,11 +57,17 @@ public class PartBean {
 		return retailprice;
 	}
 
-
 	public void setRetailprice(double retailprice) {
 		this.retailprice = retailprice;
 	}
 	
+	public int getMatch() {
+		return match;
+	}
+
+	public void setMatch(int match) {
+		this.match = match;
+	}
 
 	
 }

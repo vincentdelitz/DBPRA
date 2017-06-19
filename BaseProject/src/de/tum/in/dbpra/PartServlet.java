@@ -40,6 +40,8 @@ public class PartServlet extends HttpServlet {
 		
 		PartDAO part = new PartDAO();
 		PartListBean partlist = new PartListBean();
+		PartDAO partsearch = new PartDAO();
+		PartListBean partlistsearch = new PartListBean();
 
 		try {
 			part.getParts(partlist);
@@ -47,16 +49,18 @@ public class PartServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*
+		
 		try {
-			part.getPartsSearch(partlist, request.getParameter("selectcolumn"), request.getParameter("searchtype"), request.getParameter("searchparameter"));
+			//partsearch.getPartsSearch(partlistsearch, request.getParameter("selectcolumn"), request.getParameter("searchtype"), request.getParameter("searchparameter"));
+			partsearch.getPartsSearch(partlistsearch, "partkey", "=", "4");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 
 		request.setAttribute("bean", partlist);	
+		request.setAttribute("beansearch", partlistsearch);	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("exercise73.jsp");
 		dispatcher.forward(request, response);
 	}

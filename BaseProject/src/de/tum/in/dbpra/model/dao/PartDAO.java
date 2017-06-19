@@ -45,6 +45,11 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 		
 		String query = "SELECT * FROM part WHERE " +column+ " " +matchType+ " ? ORDER BY name ASC";	
 		
+		if(matchType.equals("like")) {
+			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" LIKE '%?%') THEN 1 ELSE 0 END AS \"match\" FROM part";
+		} else {
+			query = "SELECT *, CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" = ?) THEN 1 ELSE 0 END AS \"match\" FROM part";
+		}
 		Connection con = getConnection();
 		
 		
@@ -72,6 +77,7 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 			part.setSize(rs.getInt("size"));
 			part.setContainer(rs.getInt("container"));
 			part.setRetailprice(rs.getInt("retailprice"));
+			part.setMatch(rs.getInt("match"));
 			partlist.setChild(part);
 		} 
 		
