@@ -67,35 +67,40 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
 		
-		if(correctsearch && likesearch) {
-			if(column.equals("partkey")) {
-				pstmt.setInt(1, Integer.parseInt(searchparam));
-			} else if(column.equals("name")) {
-				pstmt.setString(1, "%" +searchparam+ "%");
-			} else if(column.equals("type")) {
-				pstmt.setString(1, "%" +searchparam+ "%");
-			} else if(column.equals("size")) {
-				pstmt.setInt(1, Integer.parseInt(searchparam));
-			} else if(column.equals("container")) {
-				pstmt.setInt(1, Integer.parseInt(searchparam));
-			} else if(column.equals("retailprice")) {
-				pstmt.setDouble(1, Double.parseDouble(searchparam));
+		try {
+			if(correctsearch && likesearch) {
+				if(column.equals("partkey")) {
+					pstmt.setInt(1, Integer.parseInt(searchparam));
+				} else if(column.equals("name")) {
+					pstmt.setString(1, "%" +searchparam+ "%");
+				} else if(column.equals("type")) {
+					pstmt.setString(1, "%" +searchparam+ "%");
+				} else if(column.equals("size")) {
+					pstmt.setInt(1, Integer.parseInt(searchparam));
+				} else if(column.equals("container")) {
+					pstmt.setInt(1, Integer.parseInt(searchparam));
+				} else if(column.equals("retailprice")) {
+					pstmt.setDouble(1, Double.parseDouble(searchparam));
+				}
+			} else if(correctsearch) {
+				if(column.equals("partkey")) {
+					pstmt.setInt(1, Integer.parseInt(searchparam));
+				} else if(column.equals("name")) {
+					pstmt.setString(1, searchparam);
+				} else if(column.equals("type")) {
+					pstmt.setString(1, searchparam);
+				} else if(column.equals("size")) {
+					pstmt.setInt(1, Integer.parseInt(searchparam));
+				} else if(column.equals("container")) {
+					pstmt.setInt(1, Integer.parseInt(searchparam));
+				} else if(column.equals("retailprice")) {
+					pstmt.setDouble(1, Double.parseDouble(searchparam));
+				}
 			}
-		} else if(correctsearch) {
-			if(column.equals("partkey")) {
-				pstmt.setInt(1, Integer.parseInt(searchparam));
-			} else if(column.equals("name")) {
-				pstmt.setString(1, searchparam);
-			} else if(column.equals("type")) {
-				pstmt.setString(1, searchparam);
-			} else if(column.equals("size")) {
-				pstmt.setInt(1, Integer.parseInt(searchparam));
-			} else if(column.equals("container")) {
-				pstmt.setInt(1, Integer.parseInt(searchparam));
-			} else if(column.equals("retailprice")) {
-				pstmt.setDouble(1, Double.parseDouble(searchparam));
-			}
+		} catch(Exception e) {
+			throw new SQLException("Error occured. Please enter your search again.");
 		}
+
 		
 		
 		ResultSet rs = pstmt.executeQuery();
