@@ -98,7 +98,9 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 				}
 			}
 		} catch(Exception e) {
-			throw new SQLException("Error occured. Please enter your search again.");
+			query = "SELECT *, 0 AS \"match\" FROM part ORDER BY name ASC";
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
 		}
 
 		
