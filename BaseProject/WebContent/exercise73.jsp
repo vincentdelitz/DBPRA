@@ -55,6 +55,7 @@
 	</select>
 	<input type="submit" value="search" />
 </form-->
+	
 
 <div class="content container">
 
@@ -76,13 +77,13 @@
 	<div class="box">
 		<table border frame=void style="width: 100%">
 			<tr>
-				<th><a href="./part?ordercolumn=partkey">Partkey</a></th>
-				<th><a href="./part?ordercolumn=name">Name</a></th>
-				<th><a href="./part?ordercolumn=type">Type</a></th>
-				<th><a href="./part?ordercolumn=size">Size</a></th>
-				<th><a href="./part?ordercolumn=container">Container</a></th>
-				<th><a href="./part?ordercolumn=retailprice">Retailprice</a></th>
-				<th>Match</th>
+				<th><a href="./part?ordercolumn=partkey&searchparameter=<%=request.getParameter("searchparameter")%>&selectcolumn=<%=request.getParameter("selectcolumn")%>&searchtype=<%=request.getParameter("searchtype")%>">Partkey</a></th>
+				<th><a href="./part?ordercolumn=name&searchparameter=<%=request.getParameter("searchparameter")%>&selectcolumn=<%=request.getParameter("selectcolumn")%>&searchtype=<%=request.getParameter("searchtype")%>">Name</a></th>
+				<th><a href="./part?ordercolumn=type&searchparameter=<%=request.getParameter("searchparameter")%>&selectcolumn=<%=request.getParameter("selectcolumn")%>&searchtype=<%=request.getParameter("searchtype")%>">Type</a></th>
+				<th><a href="./part?ordercolumn=size&searchparameter=<%=request.getParameter("searchparameter")%>&selectcolumn=<%=request.getParameter("selectcolumn")%>&searchtype=<%=request.getParameter("searchtype")%>">Size</a></th>
+				<th><a href="./part?ordercolumn=container&searchparameter=<%=request.getParameter("searchparameter")%>&selectcolumn=<%=request.getParameter("selectcolumn")%>&searchtype=<%=request.getParameter("searchtype")%>">Container</a></th>
+				<th><a href="./part?ordercolumn=retailprice&searchparameter=<%=request.getParameter("searchparameter")%>&selectcolumn=<%=request.getParameter("selectcolumn")%>&searchtype=<%=request.getParameter("searchtype")%>">Retailprice</a></th>
+				<!--th>Match</th-->
 
 			</tr>
 			<%
@@ -99,7 +100,7 @@
 				<td style="font-weight:bold"><%=beansearch.getChild(i).getSize()%></td>
 				<td style="font-weight:bold"><%=beansearch.getChild(i).getContainer()%></td>
 				<td style="font-weight:bold"><%=beansearch.getChild(i).getRetailprice()%></td>
-				<td style="font-weight:bold"><%=beansearch.getChild(i).getMatch()%></td>
+				<!--td style="font-weight:bold"><%=beansearch.getChild(i).getMatch()%></td-->
 			</tr>
 			<%
 					} else {
@@ -112,7 +113,7 @@
 				<td><%=beansearch.getChild(i).getSize()%></td>
 				<td><%=beansearch.getChild(i).getContainer()%></td>
 				<td><%=beansearch.getChild(i).getRetailprice()%></td>
-				<td><%=beansearch.getChild(i).getMatch()%></td>
+				<!--td><%=beansearch.getChild(i).getMatch()%></td-->
 			</tr>
 			<%
 					}

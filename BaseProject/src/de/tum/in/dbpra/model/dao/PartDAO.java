@@ -56,7 +56,7 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 		boolean likesearch = false;
 		
 		if(column!=null) {
-			if(!(column.equals("name") || column.equals("type"))) {
+			if(column.equals("partkey") || column.equals("size") || column.equals("container") || column.equals("retailprice")) {
 				matchType = "exact";
 			}
 		}
@@ -73,7 +73,7 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 			/*query = "SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice" +
 					", CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM part WHERE \"" +column+ "\" LIKE ?) THEN 1 ELSE 0 END AS \"match\" FROM part ORDER BY " +orderparam;*/
 			likesearch = true;
-		} else {
+		} else if(matchType.equals("exact")) {
 			query = "SELECT * " +
 					", CASE WHEN \"" +column+ "\" IN (SELECT \"" +column+ "\" FROM (SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice FROM part) TMP1 WHERE \"" +column+ "\" = ?) THEN 1 ELSE 0 END AS \"match\" " +
 							"FROM (SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice FROM part) TMP2 ORDER BY " +orderparam;
@@ -117,7 +117,8 @@ public void getPartsSearch(PartListBean partlist, String column, String matchTyp
 				}
 			}
 		} catch(Exception e) {
-			query = "SELECT *, 0 AS \"match\" FROM part ORDER BY " +orderparam;
+			query = "SELECT partkey, COALESCE(name, '') AS name, COALESCE(\"type\", '') AS \"type\", COALESCE(size, 0) AS size, COALESCE(container, 0) AS container, COALESCE(retailprice, 0.0) AS retailprice" +
+					", 0 AS \"match\" FROM part ORDER BY " +orderparam;
 			con = getConnection();
 			pstmt = con.prepareStatement(query);
 		}
