@@ -45,7 +45,7 @@ public class PartDAO extends DAO{
 public void getPartsSearch(PartListBean partlist, String column, String matchType, String searchparam, String orderparam) throws SQLException, ClassNotFoundException {
 		
 		if(orderparam==null) {
-			orderparam = "partkey";
+			orderparam = "name";
 		} else if(!orderparam.equals("partkey")) {
 			orderparam += " ,partkey";
 		}
