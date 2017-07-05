@@ -8,6 +8,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name=viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/class" href="bootstrap/css/bootstrap.min.css">
 
 <title>Exercise 7.3</title>
 
@@ -123,5 +125,7 @@
 	</div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
