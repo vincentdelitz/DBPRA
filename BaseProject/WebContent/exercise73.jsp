@@ -15,11 +15,10 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
    </head>
    <form>
-      <div class="form-group">
-      <label for="searchparameter">Search:</label>
-      <input type="text" class="form-control" id="searchparameter"><br>
+     Search:<br>
+    <input type="text" name="searchparameter"><br>
       <br/>
-      <fieldset>
+      <fieldset class="form-group">
          <div class="radio">
             <label><input type="radio" id="ex" name="searchtype" value="exact" checked> Exact Match
             </label><br>
@@ -55,7 +54,6 @@
             Retailprice (entering decimal is necessary)</label><br>
          </div>
       </fieldset>
-      <!--<input type="submit" value="search" />-->
       <button type="submit" class="btn btn-default">Search</button>
    </form>
    <div class="content container">
