@@ -7,15 +7,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name=viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/class" href="bootstrap/css/bootstrap.min.css">
-
-<title>Exercise 7.2</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Exercise 7.2</title>
+      <!-- Bootstrap -->
+      <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-
-<a href="./exercise71.html">Back to exercise71.html</a>
 
 <div class="content container">
 
@@ -35,7 +34,7 @@
 	
 
 	<div class="box">
-		<table border frame=void style="width: 100%">
+		<table  class="table table-striped">
 			<tr>
 				<th>Orderkey</th>
 				<th>Custkey</th>
@@ -68,7 +67,7 @@
 	
 
 	<div class="box">
-		<table border frame=void style="width: 100%">
+		<table  class="table table-striped">
 			<tr>
 				<th>Orderkey</th>
 				<th>Custkey</th>
@@ -94,9 +93,10 @@
 		</table>
 	</div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>
