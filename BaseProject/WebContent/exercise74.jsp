@@ -59,7 +59,7 @@
 				<td><%=order.getTotalprice()%></td>
 			</tr>
 </table>
-			Table with all order items
+			<h3>Table with all order items</h3>
 			<table class="table table-striped" >
 <tr>				
 				<th>Linenumber</th>
@@ -97,3 +97,4 @@
    <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
