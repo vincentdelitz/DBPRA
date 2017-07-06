@@ -20,8 +20,8 @@
       <br/>
       <fieldset>
          <div class="radio">
-            <input type="radio" id="ex" name="searchtype" value="exact" checked>
-            <label for="mc"> Exact Match</label><br>
+            <label><input type="radio" id="ex" name="searchtype" value="exact" checked>Exact Match
+            </label><br>
          </div>
          <div class="radio">
             <input type="radio" id="li" name="searchtype" value="like">
