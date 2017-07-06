@@ -15,46 +15,48 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
    </head>
    <form>
-      Search:<br>
-      <input type="text" name="searchparameter"><br>
+      <div class="form-group">
+      <label for="searchparameter">Search:</label>
+      <input type="text" class="form-control" id="searchparameter"><br>
       <br/>
       <fieldset>
          <div class="radio">
-            <label><input type="radio" id="ex" name="searchtype" value="exact" checked>Exact Match
+            <label><input type="radio" id="ex" name="searchtype" value="exact" checked> Exact Match
             </label><br>
          </div>
          <div class="radio">
-            <input type="radio" id="li" name="searchtype" value="like">
-            <label for="vi"> Like Match (only possible for 'Name' and 'Type')</label><br>
+            <label><input type="radio" id="li" name="searchtype" value="like">
+            Like Match (only possible for 'Name' and 'Type')</label><br>
          </div>
       </fieldset>
       <fieldset>
          <div class="radio">
-            <input type="radio" id="partkey" name="selectcolumn" value="partkey" checked>
-            <label for="mc"> Partkey</label><br>
+            <label><input type="radio" id="partkey" name="selectcolumn" value="partkey" checked>
+            Partkey</label><br>
          </div>
          <div class="radio">
-            <input type="radio" id="name" name="selectcolumn" value="name">
-            <label for="mc"> Name</label><br>
+            <label><input type="radio" id="name" name="selectcolumn" value="name">
+            Name</label><br>
          </div>
          <div class="radio">
-            <input type="radio" id="type" name="selectcolumn" value="type">
-            <label for="mc"> Type</label><br>
+            <label><input type="radio" id="type" name="selectcolumn" value="type">
+            Type</label><br>
          </div>
          <div class="radio">
-            <input type="radio" id="size" name="selectcolumn" value="size">
-            <label for="mc"> Size</label><br>
+            <label><input type="radio" id="size" name="selectcolumn" value="size">
+            Size</label><br>
          </div>
          <div class="radio">
-            <input type="radio" id="container" name="selectcolumn" value="container">
-            <label for="mc"> Container</label><br>
+            <label><input type="radio" id="container" name="selectcolumn" value="container">
+            Container</label><br>
          </div>
          <div class="radio">
-            <input type="radio" id="retailprice" name="selectcolumn" value="retailprice">
-            <label for="mc"> Retailprice (entering decimal is necessary)</label><br>
+            <label><input type="radio" id="retailprice" name="selectcolumn" value="retailprice">
+            Retailprice (entering decimal is necessary)</label><br>
          </div>
       </fieldset>
-      <input type="submit" value="search" />
+      <!--<input type="submit" value="search" />-->
+      <button type="submit" class="btn btn-default">Search</button>
    </form>
    <div class="content container">
       <%
