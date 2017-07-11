@@ -4,22 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import de.tum.in.dbpra.model.bean.OrderBean;
-import de.tum.in.dbpra.model.bean.OrderListBean;
-import de.tum.in.dbpra.model.bean.PartBean;
-import de.tum.in.dbpra.model.bean.PartListBean;
 import de.tum.in.dbpra.model.bean.StageBean;
+import de.tum.in.dbpra.model.bean.StageListBean;
 
 public class StageDAO extends DAO{
 	
-	public void getPersonalStages(ArrayList<StageBean> stagelist, String firstname, String lastname) throws SQLException, ClassNotFoundException {
+	public void getPersonalStages(StageListBean stagelist, String firstname, String lastname) throws SQLException, ClassNotFoundException {
 		
+		//for testing reasons only simple test query
 		String query = "SELECT * FROM stage;";	
 		
 		Connection con = getConnection();
-		
+		//con.setAutoCommit(false);
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
 		
@@ -27,13 +24,13 @@ public class StageDAO extends DAO{
 		
 		while(rs.next()) {
 			StageBean stage = new StageBean();
-			stage.setStageID(rs.getInt("stageID"));
-			stage.setName(rs.getString("name"));
+			stage.setStageID(rs.getInt("stagenr"));
+			stage.setName(rs.getString("stagename"));
 			stage.setSize(rs.getDouble("size"));
-			stagelist.add(stage);
+			stagelist.setChild(stage);
 		} 
 		
-		con.commit();
+		//con.commit();
 		rs.close();
 		pstmt.close();
 		con.close();

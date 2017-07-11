@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import de.tum.in.dbpra.model.bean.CustomerBean;
 import de.tum.in.dbpra.model.bean.PartListBean;
 import de.tum.in.dbpra.model.bean.StageBean;
+import de.tum.in.dbpra.model.bean.StageListBean;
 import de.tum.in.dbpra.model.dao.CustomerDAO;
 import de.tum.in.dbpra.model.dao.PartDAO;
 import de.tum.in.dbpra.model.dao.StageDAO;
@@ -38,7 +39,7 @@ public class StageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("VisitorSearch.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/VisitorSearch.jsp");
 		dispatcher.forward(request, response);
 }
 
@@ -46,21 +47,23 @@ public class StageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		StageDAO stage = new StageDAO();
-		ArrayList<StageBean> stagelist = new ArrayList<>();
+		
 
 		
 		try {
+			StageDAO stage = new StageDAO();
+			StageListBean stagelist = new StageListBean();
 			stage.getPersonalStages(stagelist, request.getParameter("firstname"), request.getParameter("lastname"));
+			request.setAttribute("bean", stagelist);
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+    		request.setAttribute("error", e.toString() + e.getMessage());
 		}
 		
 
-		request.setAttribute("bean", stagelist);	
-		RequestDispatcher dispatcher = request.getRequestDispatcher("VisitorSearch.jsp");
+			
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/VisitorSearch.jsp");
 		dispatcher.forward(request, response);
 		
 	}
