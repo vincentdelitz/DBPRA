@@ -12,8 +12,7 @@ public class ProductDAO extends DAO{
 	
 	public void getProducts(ProductListBean productlist) throws SQLException, ClassNotFoundException {
 		
-		String query = "SELECT productID, name, type, price" +
-				" FROM product ORDER BY name ASC";	
+		String query = "SELECT * FROM product;";	
 		
 		Connection con = getConnection();
 		
@@ -26,7 +25,7 @@ public class ProductDAO extends DAO{
 			ProductBean product = new ProductBean();
 			product.setProductID(rs.getInt("productid"));
 			product.setName(rs.getString("name"));
-			product.setType(rs.getString("type"));
+			product.setType(rs.getString("producttype"));
 			product.setPrice(rs.getDouble("price"));
 			productlist.setChild(product);
 		} 

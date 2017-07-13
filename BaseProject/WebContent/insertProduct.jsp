@@ -71,9 +71,9 @@
   		</select>
 	</div>
 	<label for="price">Product price</label>
-		<input type="number" name="price" id="price"/>
+		<input type="decimal" name="price" id="price"/>
 			<br/>
-			<input type="submit" value="Insert" />
+			<input type="submit" value="search" />
 	</form>
 </br>
 <% if (request.getAttribute("error") != null) { %>
