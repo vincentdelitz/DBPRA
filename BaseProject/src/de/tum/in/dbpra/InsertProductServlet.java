@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.tum.in.dbpra.model.bean.ProductListBean;
-import de.tum.in.dbpra.model.bean.StageListBean;
 import de.tum.in.dbpra.model.dao.ProductDAO;
-import de.tum.in.dbpra.model.dao.StageDAO;
 
 
 /**
@@ -50,7 +48,7 @@ public class InsertProductServlet extends HttpServlet {
 		
 
 			
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/insertProduct.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("insertProduct.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -60,7 +58,7 @@ public class InsertProductServlet extends HttpServlet {
 		/*try {
 			ProductDAO product = new ProductDAO();
 			ProductListBean productlist = new ProductListBean();
-			product.getProducts(productlist);
+			product.insertProduct(request.getParameter("name"), request.getParameter("type"), request.getParameter("price"));
 			request.setAttribute("bean",productlist);
 
 		} catch (ClassNotFoundException | SQLException e) {

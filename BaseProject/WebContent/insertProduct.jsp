@@ -73,22 +73,22 @@
 	<label for="price">Product price</label>
 		<input type="decimal" name="price" id="price"/>
 			<br/>
-			<input type="submit" value="search" />
+			<input type="submit" value="Insert" />
 	</form>
 </br>
 <% if (request.getAttribute("error") != null) { %>
 	<h1>Nothing found!</h1>
 	<%= request.getAttribute("error") %>
 
-	<% } else { %>
-        		<div class="box">
+	<% }  %>
+        <div class="box">
 		<table  class="table table-striped">
 			<tr>
 				<th>ProductID</th>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Price</th>
-				</tr>
+			</tr>
 			<%
 				for (int i = 0; i < bean.getList().size(); i++) {
 			%>
@@ -105,7 +105,7 @@
 		</table>
 	</div>
 </div>
-        	<% } %>
+        	
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
