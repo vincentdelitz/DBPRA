@@ -37,13 +37,6 @@ public class InsertProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/insertProduct.jsp");
-		dispatcher.forward(request, response);
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 		try {
 			ProductDAO product = new ProductDAO();
 			ProductListBean productlist = new ProductListBean();
@@ -59,6 +52,26 @@ public class InsertProductServlet extends HttpServlet {
 			
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/insertProduct.jsp");
 		dispatcher.forward(request, response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		/*try {
+			ProductDAO product = new ProductDAO();
+			ProductListBean productlist = new ProductListBean();
+			product.getProducts(productlist);
+			request.setAttribute("bean",productlist);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+    		request.setAttribute("error", e.toString() + e.getMessage());
+		}
+		
+
+			
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/insertProduct.jsp");
+		dispatcher.forward(request, response);*/
 	}
 	
 	
