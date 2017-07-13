@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <jsp:useBean id="bean" scope="request" class="de.tum.in.dbpra.model.bean.StageListBean"></jsp:useBean>
+ <jsp:useBean id="bean" scope="request" class="de.tum.in.dbpra.model.bean.ProductListBean"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,13 +58,22 @@
 
 
 	<form method="post">
-		<label for="firstname">First name visitor</label>
-		<input type="text" name="firstname" id="firstname" default="Max" />
+		<label for="name">Product name</label>
+		<input type="text" name="name" id="name"/>
 			<br/>
-	<label for="lastname">Last name visitor</label>
-		<input type="text" name="lastname" id="lastname" default="Mustermann" />
+	<div class="form-group">
+ 		 <label for="type">Select the product type</label>
+  		 <select class="form-control" id="type">
+    			<option>Drink</option>
+    			<option>Food</option>
+    			<option>Clothing</option>
+    			<option>Souvenir</option>
+  		</select>
+	</div>
+	<label for="price">Product price</label>
+		<input type="number" name="price" id="price"/>
 			<br/>
-			<input type="submit" value="search" />
+			<input type="submit" value="Insert" />
 	</form>
 </br>
 <% if (request.getAttribute("error") != null) { %>
@@ -75,18 +84,20 @@
         		<div class="box">
 		<table  class="table table-striped">
 			<tr>
-				<th>StageID</th>
+				<th>ProductID</th>
 				<th>Name</th>
-				<th>Size</th>
+				<th>Type</th>
+				<th>Price</th>
 				</tr>
 			<%
 				for (int i = 0; i < bean.getList().size(); i++) {
 			%>
 			<tr>
 
-				<td><%=bean.getChild(i).getStageID()%></td>
+				<td><%=bean.getChild(i).getProductID()%></td>
 				<td><%=bean.getChild(i).getName()%></td>
-				<td><%=bean.getChild(i).getSize()%></td>
+				<td><%=bean.getChild(i).getType()%></td>
+				<td><%=bean.getChild(i).getPrice()%></td>
 			</tr>
 			<%
 				}
