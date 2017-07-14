@@ -63,7 +63,7 @@
 			<br/>
 	<div class="form-group">
  		 <label for="producttype">Select the product type</label>
-  		 <select class="form-control" id="producttype" name="producttype">
+  		 <select  class="input-small" class="input-small" id="producttype" name="producttype">
     			<option>drink</option>
     			<option>food</option>
     			<option>clothing</option>

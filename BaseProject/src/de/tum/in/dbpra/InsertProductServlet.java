@@ -62,7 +62,7 @@ public class InsertProductServlet extends HttpServlet {
 			product.getProducts(productlist);
 			request.setAttribute("bean",productlist);
 
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | NumberFormatException e) {
 			e.printStackTrace();
     		request.setAttribute("error", e.toString() + e.getMessage());
 		}
