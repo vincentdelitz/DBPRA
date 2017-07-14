@@ -62,18 +62,18 @@
 		<input type="text" name="name" id="name"/>
 			<br/>
 	<div class="form-group">
- 		 <label for="type">Select the product type</label>
-  		 <select class="form-control" id="type">
-    			<option>Drink</option>
-    			<option>Food</option>
-    			<option>Clothing</option>
-    			<option>Souvenir</option>
+ 		 <label for="producttype">Select the product type</label>
+  		 <select class="form-control" id="producttype" name="producttype">
+    			<option>drink</option>
+    			<option>food</option>
+    			<option>clothing</option>
+    			<option>souvenir</option>
   		</select>
 	</div>
 	<label for="price">Product price</label>
 		<input type="decimal" name="price" id="price"/>
 			<br/>
-			<input type="submit" value="Insert" />
+		<input type="submit" value="Insert" />
 	</form>
 </br>
 <% if (request.getAttribute("error") != null) { %>

@@ -39,20 +39,21 @@ public class ProductDAO extends DAO{
 		
 	}
 	
-	public void insertProduct(String name, String type, String price)throws SQLException, ClassNotFoundException {
+	public void insertProduct(String name, String type, double price)throws SQLException, ClassNotFoundException {
 		
-		String query = "INSERT INTO product (name,producttype,price) VALUES (?,?,?);";	
+		String query = "INSERT INTO product (name,producttype,price) VALUES (?,?::\"producttype\",?);";	
 		
 		Connection con = getConnection();
+		con.setAutoCommit(false);
 		PreparedStatement pstmt = con.prepareStatement(query);
 		
 		pstmt.setString(1, name);
 		pstmt.setString(2, type);
-		pstmt.setString(3, price);
+		pstmt.setDouble(3, price);
 		
 		
 		
-		pstmt.executeUpdate(query);
+		pstmt.executeUpdate();
 		
 		
 		con.commit();
