@@ -10,8 +10,7 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-	<nav class="navbar navbar-default">
+      <nav class="navbar navbar-default">
          <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -29,11 +28,8 @@
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee <span class="caret"></span></a>
                      <ul class="dropdown-menu">
-
                         <li><a href="./ShiftServlet">Search Shifts</a></li>
-                        <li><a href="./SearchProduct.jsp">Search for a product</a></li>
 			<li><a href="./insertProduct">Insert new product</a></li>
-
                      </ul>
                   </li>
                   <li class="dropdown">
@@ -41,6 +37,7 @@
                      <ul class="dropdown-menu">
                         <li><a href="#">Activity Diagram</a></li>
                         <li><a href="./stage">Search personal stages</a></li>
+			<li><a href="./SearchProduct.jsp">Search for a product</a></li>
                      </ul>
                   </li>
                </ul>
