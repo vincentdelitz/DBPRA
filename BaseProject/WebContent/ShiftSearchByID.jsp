@@ -50,13 +50,14 @@
          <!-- /.container-fluid -->
       </nav>
 
+	<h4>Please insert the first and last name of the employee that you want to search the shift for. Tĥe names must exactly match meaning that the values are also case sensitive.</h4>
 	<form method="post">
 		First Name: <input type = "text" name="firstname" value=<%=session.getAttribute("firstname")%> ><br>
 		Last Name: <input type = "text" name="lastname" value=<%=session.getAttribute("lastname")%> ><br>
 		<label for="personID">Person ID</label>
 		<input type="number" name="personID" id="personID" default="1" />
 			<br/>
-			<input type="submit" value="GET SHIFTS" />
+			<input type="submit" value="Get shifts" />
 	</form>
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

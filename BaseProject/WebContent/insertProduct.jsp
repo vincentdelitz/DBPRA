@@ -51,6 +51,7 @@
          <!-- /.container-fluid -->
       </nav>
 
+<h4>Here you see a list of all available products. If you want to create one that is not yet in the list, fill in the data and click "Insert".</h4>
 
 	<form method="post">
 		<label for="name">Product name</label>

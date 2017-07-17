@@ -51,6 +51,9 @@
          <!-- /.container-fluid -->
       </nav>
 
+<h4>Here you can search for the stages that a certain visitor will see. Please enter exact values for the first and last name, as it is also case sensitive.</h4>
+	
+
 	<form method="post">
 		<label for="firstname">First name visitor</label>
 		<input type="text" name="firstname" id="firstname" default="Max" />
