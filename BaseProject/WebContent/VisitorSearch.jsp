@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-   <head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+ <jsp:useBean id="bean" scope="request" class="de.tum.in.dbpra.model.bean.StageListBean"></jsp:useBean>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Festival Database</title>
+      <title>Search stages for visitors</title>
       <!-- Bootstrap -->
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-   </head>
-   <body>
-      <nav class="navbar navbar-default">
+</head>
+<body>
+<nav class="navbar navbar-default">
          <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -51,15 +54,50 @@
          </div>
          <!-- /.container-fluid -->
       </nav>
-      <div class="container">
-         <div class="starter-template">
-            <h1>Header</h1>
-            <p class="lead">Here will be the corresponding tables and forms.</p>
-         </div>
-      </div>
+
+
+	<form method="post">
+		<label for="firstname">First name visitor</label>
+		<input type="text" name="firstname" id="firstname" default="Max" />
+			<br/>
+	<label for="lastname">Last name visitor</label>
+		<input type="text" name="lastname" id="lastname" default="Mustermann" />
+			<br/>
+			<input type="submit" value="search" />
+	</form>
+</br>
+<% if (request.getAttribute("error") != null) { %>
+	<h1>Nothing found!</h1>
+	<%= request.getAttribute("error") %>
+
+	<% } else { %>
+        		<div class="box">
+		<table  class="table table-striped">
+			<tr>
+				<th>StageID</th>
+				<th>Name</th>
+				<th>Size</th>
+				</tr>
+			<%
+				for (int i = 0; i < bean.getList().size(); i++) {
+			%>
+			<tr>
+
+				<td><%=bean.getChild(i).getStageID()%></td>
+				<td><%=bean.getChild(i).getName()%></td>
+				<td><%=bean.getChild(i).getSize()%></td>
+			</tr>
+			<%
+				}
+			%>
+		</table>
+	</div>
+</div>
+        	<% } %>
+
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="bootstrap/js/bootstrap.min.js"></script>
-   </body>
+</body>
 </html>
