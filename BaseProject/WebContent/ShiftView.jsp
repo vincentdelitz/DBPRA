@@ -17,7 +17,7 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	      <nav class="navbar navbar-default">
          <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -27,7 +27,7 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="#">Festival</a>
+               <a class="navbar-brand" href="./index.htm">Festival</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -35,11 +35,8 @@
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee <span class="caret"></span></a>
                      <ul class="dropdown-menu">
-
                         <li><a href="./ShiftServlet">Search Shifts</a></li>
-                        <li><a href="./SearchProduct.jsp">Search for a product</a></li>
 			<li><a href="./insertProduct">Insert new product</a></li>
-
                      </ul>
                   </li>
                   <li class="dropdown">
@@ -47,6 +44,7 @@
                      <ul class="dropdown-menu">
                         <li><a href="#">Activity Diagram</a></li>
                         <li><a href="./stage">Search personal stages</a></li>
+			<li><a href="./SearchProduct.jsp">Search for a product</a></li>
                      </ul>
                   </li>
                </ul>
@@ -61,7 +59,7 @@
 		<%= request.getAttribute("error") %>
 				
 	<% } else if (request.getAttribute("error1") != null) { %>
-		<h3>There is not employee with the following name: <%=request.getParameter("firstname")%> <%=request.getParameter("lastname")%></h3>
+		<h3>There is no employee with the following name: <%=request.getParameter("firstname")%> <%=request.getParameter("lastname")%></h3>
 		<a href="./ShiftServlet">Try again</a>
 
 	<% } else if (request.getAttribute("error2") != null) { %>
