@@ -62,8 +62,8 @@
 		} else {
 	%>
 	<%-- get the list of offers--%>
-	<table>
-		<caption><h1>offers</h1></caption>
+	<table class="table table-striped">
+		<caption><h1>Offers</h1></caption>
 	<%
 		ArrayList<offerBean> offers = (ArrayList<offerBean>) request
 					.getAttribute("offer");
@@ -72,6 +72,7 @@
 	<tr>
 	<%--the headlines for each columns --%>
 		<th>productID</th>
+		<th>Product Name</th>
 		<th>AreaID</th>
 		<th>Area Name</th>
 		<th>ShopID</th>
@@ -82,6 +83,7 @@
 	%>
 	<tr>
 		<td><%=offers.get(i).getProductID()%></td>
+		<td><%=offers.get(i).getPname()%></td>
 		<td><%=offers.get(i).getAreaID()%></td>
 		<td><%=offers.get(i).getAreaname()%></td>
 		<td><%=offers.get(i).getShopID()%></td>
