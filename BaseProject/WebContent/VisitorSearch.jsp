@@ -80,6 +80,7 @@
 				<th>StageID</th>
 				<th>Name</th>
 				<th>Size</th>
+				<th>Name of Band</th>
 				<th>Performance Start</th>
 				<th>Performance End</th>
 				</tr>
@@ -94,6 +95,7 @@
 				<td><%=bean.getChild(i).getStageID()%></td>
 				<td><%=bean.getChild(i).getName()%></td>
 				<td><%=bean.getChild(i).getSize()%></td>
+				<td><%=bean.getChild(i).getBandName()%></td>
 				<td><%=bean.getChild(i).getPerformanceStart()%></td>
 				<td><%=bean.getChild(i).getPerformanceEnd()%></td>
 			</tr>

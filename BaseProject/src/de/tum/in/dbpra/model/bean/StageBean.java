@@ -7,6 +7,7 @@ public class StageBean {
 	private int stageID;
 	private String name;
 	private double size;
+	private String bandName;
 	private String performanceStart;
 	private String performanceEnd;
 
@@ -64,6 +65,14 @@ public class StageBean {
 
 	public void setSize(double size) {
 		this.size = size;
+	}
+	
+	public String getBandName() {
+		return bandName;
+	}
+	
+	public void setBandName(String bandName) {
+		this.bandName = bandName;
 	}
 	
 	public void setPerformanceStart(String performanceStart) {
