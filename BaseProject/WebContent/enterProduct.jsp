@@ -55,40 +55,34 @@
          <!-- /.container-fluid -->
       </nav>
 
-<h3>Which Product do you like to offer in your shop?</h3>
-</br>
-<% if (request.getAttribute("error") != null) { %>
-	<h1>Nothing found!</h1>
-	<%= request.getAttribute("error") %>
-
-	<% }  %>
-        <div class="box">
-		<table  class="table table-striped">
-			<tr>
-				<th>Name</th>
-				<th>ProductID</th>
-				<th>Type</th>
-				<th>Price</th>
-			</tr>
-			<%
-				for (int i = 0; i < bean.getList().size(); i++) {
-			%>
-			<tr>
-				<td><a href="./InsertProductServlet2?productID=<%=bean.getChild(i).getProductID()%>"><%=bean.getChild(i).getName()%></a></td>
-				<td><%=bean.getChild(i).getProductID()%></td>
-				<td><%=bean.getChild(i).getType()%></td>
-				<td><%=bean.getChild(i).getPrice()%></td>
-			</tr>
-			<%
-				}
-			%>
-		</table>
+<h3>Please insert your Product Details!</h3>
+	
+	<form method="post">
+		<label for="name">Product name</label>
+		<input type="text" name="name" id="name"/>
+			<br/>
+	<div class="form-group">
+ 		 <label for="producttype">Select the product type</label>
+  		 <select  class="input-small" class="input-small" id="producttype" name="producttype">
+    			<option>drink</option>
+    			<option>food</option>
+    			<option>clothing</option>
+    			<option>souvenir</option>
+  		</select>
 	</div>
-</div>
-<h5>The Product you want to offer is not in the list?</h5>
-<a href="./InsertProductServlet3">Insert new Product into the database!</a>
-
-        	
+	<label for="price">Product price</label>
+		<input type="decimal" name="price" id="price"/>
+			<br/>
+		<label for="quantity">Product Quantity</label>
+		<input type="number" name="quantity" id="quantity"/>
+			<br/>
+		<label for="shopID">Your Shop ID</label>
+		<input type="number" name="shopID" id="shopID"/>
+			<br/>
+			<br/>
+	
+		<input type="submit" value="Insert" />
+	</form>
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
