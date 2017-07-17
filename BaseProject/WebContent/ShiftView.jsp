@@ -59,7 +59,7 @@
 		<%= request.getAttribute("error") %>
 				
 	<% } else if (request.getAttribute("error1") != null) { %>
-		<h3>There is not employee with the following name: <%=request.getParameter("firstname")%> <%=request.getParameter("lastname")%></h3>
+		<h3>There is no employee with the following name: <%=request.getParameter("firstname")%> <%=request.getParameter("lastname")%></h3>
 		<a href="./ShiftServlet">Try again</a>
 
 	<% } else if (request.getAttribute("error2") != null) { %>
