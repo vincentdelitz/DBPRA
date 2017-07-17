@@ -69,18 +69,28 @@
         		<div class="box">
 		<table  class="table table-striped">
 			<tr>
+				<th>Visitor ID</th>
+				<th>Firstname of Visitor</th>
+				<th>Lastname of Visitor</th>
 				<th>StageID</th>
 				<th>Name</th>
 				<th>Size</th>
+				<th>Performance Start</th>
+				<th>Performance End</th>
 				</tr>
 			<%
 				for (int i = 0; i < bean.getList().size(); i++) {
 			%>
 			<tr>
 
+				<td><%=bean.getChild(i).getPersID()%></td>
+				<td><%=bean.getChild(i).getPersFirstName()%></td>
+				<td><%=bean.getChild(i).getPersLastName()%></td>
 				<td><%=bean.getChild(i).getStageID()%></td>
 				<td><%=bean.getChild(i).getName()%></td>
 				<td><%=bean.getChild(i).getSize()%></td>
+				<td><%=bean.getChild(i).getPerformanceStart()%></td>
+				<td><%=bean.getChild(i).getPerformanceEnd()%></td>
 			</tr>
 			<%
 				}

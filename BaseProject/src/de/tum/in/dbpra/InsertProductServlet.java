@@ -58,13 +58,31 @@ public class InsertProductServlet extends HttpServlet {
 		try {
 			ProductDAO product = new ProductDAO();
 			ProductListBean productlist = new ProductListBean();
-			product.insertProduct(request.getParameter("name"), request.getParameter("producttype"), Double.parseDouble(request.getParameter("price")));
+			product.getProducts(productlist);
+			request.setAttribute("bean",productlist);
+		} catch (ClassNotFoundException | SQLException | NumberFormatException e) {
+			e.printStackTrace();
+    		request.setAttribute("error", /*e.toString() +*/ e.getMessage());
+		}
+		
+		Double price = 1.00;
+		try {
+			price = Double.parseDouble(request.getParameter("price"));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+    		request.setAttribute("error", "Invalid decimal (price)");
+		}
+		
+		try {
+			ProductDAO product = new ProductDAO();
+			ProductListBean productlist = new ProductListBean();			
+			product.insertProduct(request.getParameter("name"), request.getParameter("producttype"), price);
 			product.getProducts(productlist);
 			request.setAttribute("bean",productlist);
 
 		} catch (ClassNotFoundException | SQLException | NumberFormatException e) {
 			e.printStackTrace();
-    		request.setAttribute("error", e.toString() + e.getMessage());
+    		request.setAttribute("error", /*e.toString() +*/ e.getMessage());
 		}
 
 			
