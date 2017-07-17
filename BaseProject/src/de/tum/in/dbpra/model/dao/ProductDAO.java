@@ -53,6 +53,9 @@ public class ProductDAO extends DAO{
 		if(price<=0) {
 			throw new SQLException("Price must be more than 0");
 		}
+		if(price>=10000) {
+			throw new SQLException("Price must be less than 10000");
+		}
 		if(name==""||name==null) {
 			throw new SQLException("Please enter a name");
 		}
