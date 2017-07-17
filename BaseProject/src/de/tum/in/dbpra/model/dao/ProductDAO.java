@@ -47,6 +47,16 @@ public class ProductDAO extends DAO{
 		con.setAutoCommit(false);
 		PreparedStatement pstmt = con.prepareStatement(query);
 		
+		/*if(price==null) {
+			throw new SQLException("Please enter a description for the price");
+		}*/
+		if(price<=0) {
+			throw new SQLException("Price must be more than 0");
+		}
+		if(name==""||name==null) {
+			throw new SQLException("Please enter a name");
+		}
+		
 		pstmt.setString(1, name);
 		pstmt.setString(2, type);
 		pstmt.setDouble(3, price);

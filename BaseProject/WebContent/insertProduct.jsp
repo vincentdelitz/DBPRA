@@ -77,8 +77,17 @@
 	</form>
 </br>
 <% if (request.getAttribute("error") != null) { %>
-	<h1>Nothing found!</h1>
-	<%= request.getAttribute("error") %>
+	<!--h1>Nothing found!</h1-->
+	<%! String s1 = ""; %>
+	<% s1 = (String) request.getAttribute("error");%>
+	<script type="text/javascript">
+	function alertName(){
+	var str="<%=s1%>";
+	alert("An error has occured: " + str);
+	} 
+	</script>
+	<script type="text/javascript"> window.onload = alertName; </script>
+	<!--%= request.getAttribute("error") %-->
 
 	<% }  %>
         <div class="box">
