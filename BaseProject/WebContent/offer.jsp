@@ -29,24 +29,20 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav">
                   <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Organiser <span class="caret"></span></a>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee <span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                        <li><a href="#">Sequence Diagram 1</a></li>
-                        <li><a href="#">Sequence Diagram 2</a></li>
+
+                        <li><a href="./ShiftServlet">Search Shifts</a></li>
+                        <li><a href="./SearchProduct.jsp">Search for a product</a></li>
+			<li><a href="./insertProduct">Insert new product</a></li>
+
                      </ul>
                   </li>
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitor <span class="caret"></span></a>
                      <ul class="dropdown-menu">
                         <li><a href="#">Activity Diagram</a></li>
-                        <li><a href="#">Sequence Diagram 3</a></li>
-                     </ul>
-                  </li>
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Homework Example <span class="caret"></span></a>
-                     <ul class="dropdown-menu">
-                        <li><a href="./order">Exercise 7.2</a></li>
-                        <li><a href="./part">Exercise 7.3</a></li>
+                        <li><a href="./stage">Search personal stages</a></li>
                      </ul>
                   </li>
                </ul>
