@@ -1,6 +1,7 @@
 package de.tum.in.dbpra.model.bean;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ShiftBean {
 
@@ -8,8 +9,8 @@ public class ShiftBean {
 	
 	private int employeeID;
 	private int areaID;
-	private Date starttime;
-	private Date endtime;
+	private Timestamp starttime;
+	private Timestamp endtime;
 	private String additionInfo;
 	
 	
@@ -25,16 +26,16 @@ public class ShiftBean {
 	public void setAreaID(int areaID) {
 		this.areaID = areaID;
 	}
-	public Date getStarttime() {
+	public Timestamp getStarttime() {
 		return starttime;
 	}
-	public void setStarttime(Date starttime) {
+	public void setStarttime(Timestamp starttime) {
 		this.starttime = starttime;
 	}
-	public Date getEndtime() {
+	public Timestamp getEndtime() {
 		return endtime;
 	}
-	public void setEndtime(Date endtime) {
+	public void setEndtime(Timestamp endtime) {
 		this.endtime = endtime;
 	}
 	public String getAdditionInfo() {

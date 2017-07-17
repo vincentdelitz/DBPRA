@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="java.sql.*" %>
+
 <%@ page import="de.tum.in.dbpra.model.bean.ShiftBean" %>
 
 <jsp:useBean id="shift" scope="request" class="de.tum.in.dbpra.model.bean.ShiftBean"></jsp:useBean>
