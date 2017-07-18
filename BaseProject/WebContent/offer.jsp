@@ -69,6 +69,7 @@
 	<%-- output the results --%>
 	<tr>
 	<%--the headlines for each columns --%>
+		<th></th>
 		<th>productID</th>
 		<th>Product Name</th>
 		<th>AreaID</th>
@@ -79,7 +80,9 @@
 	<%
 		for (int i = 0; i < offers.size(); i++) {
 	%>
+	
 	<tr>
+		<td><a href="./locationServlet">See Location</td>
 		<td><%=offers.get(i).getProductID()%></td>
 		<td><%=offers.get(i).getPname()%></td>
 		<td><%=offers.get(i).getAreaID()%></td>
@@ -87,6 +90,7 @@
 		<td><%=offers.get(i).getShopID()%></td>
 		<td><%=offers.get(i).getQuantity()%></td>
 	</tr>
+	
 	<%
 		}
 	%>
@@ -94,6 +98,7 @@
 	<%
 		}
 	%>
+	<h2>Locations of the shops you can find</h2>
 	<%-- go back --%>
 	<a href="./SearchProduct.jsp">find some other products :)</a>
 	<a href="./index.htm">back</a>
