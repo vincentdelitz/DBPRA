@@ -82,7 +82,7 @@
 	%>
 	
 	<tr>
-		<td><a href="./locationServlet">See Location</td>
+		<td><a href="./locationServlet?product_id=<%=offers.get(i).getProductID()%>&shop_id=<%=offers.get(i).getShopID()%>">See Location</a></td>
 		<td><%=offers.get(i).getProductID()%></td>
 		<td><%=offers.get(i).getPname()%></td>
 		<td><%=offers.get(i).getAreaID()%></td>
@@ -98,7 +98,6 @@
 	<%
 		}
 	%>
-	<h2>Locations of the shops you can find</h2>
 	<%-- go back --%>
 	<a href="./SearchProduct.jsp">find some other products :)</a>
 	<a href="./index.htm">back</a>

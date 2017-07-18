@@ -1,7 +1,15 @@
 package de.tum.in.dbpra.model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import de.tum.in.dbpra.model.bean.LocationBean;
+
 public class LocationDAO extends DAO {
-  public void getShopDetails(ArrayList<LocationBean> locations, String product_id, String shop_id) {
+  public void getShopDetails(ArrayList<LocationBean> locations, int product_id, int shop_id) throws ClassNotFoundException, SQLException {
     String query = "SELECT name, shoptype, areaname, type FROM product " +
       "JOIN offer ON product.productid = offer.productid " +
       "JOIN shop ON offer.shopid = shop.shopid " +

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import de.tum.in.dbpra.model.bean.offerBean;
-import de.tum.in.dbpra.model.dao.offerDAO;
+import de.tum.in.dbpra.model.bean.LocationBean;
+import de.tum.in.dbpra.model.dao.LocationDAO;
 
 @WebServlet("/locationServlet")
 public class LocationServlet extends HttpServlet {
@@ -27,12 +27,12 @@ public class LocationServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			if (request.getParameter("product_id") != null &&
-					request.getParameter("shop_id") != null {
-				locationDAO dao = new locationDAO();
+					request.getParameter("shop_id") != null){
+				LocationDAO dao = new LocationDAO();
 				ArrayList<LocationBean> locations = new ArrayList<LocationBean>();
-				String productId = request.getParameter("product_id");
-				String shopId = request.getParameter("shop_id");
-				dao.getShopDetails(locations, product_id, shop_id);
+				int productId = Integer.parseInt(request.getParameter("product_id"));
+				int shopId = Integer.parseInt(request.getParameter("shop_id"));
+				dao.getShopDetails(locations, productId, shopId);
 				request.setAttribute("locations", locations);
 			}
 		} catch (Throwable e) {
