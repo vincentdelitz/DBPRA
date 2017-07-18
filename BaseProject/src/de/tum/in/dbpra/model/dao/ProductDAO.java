@@ -43,6 +43,7 @@ public class ProductDAO extends DAO {
 		
 		Connection con = getConnection();
 		con.setAutoCommit(false);
+
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setInt(1, shopID);

@@ -48,7 +48,7 @@ public class InsertProductServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("insertProduct.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		int shopID = Integer.parseInt(request.getParameter("shopID"));
 //		HttpSession session = request.getSession();
@@ -67,6 +67,7 @@ public class InsertProductServlet extends HttpServlet {
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("insertProduct.jsp");
 //		dispatcher.forward(request, response);
 		
+
 
 	}
 	

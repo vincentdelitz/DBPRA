@@ -14,12 +14,13 @@ public class StageDAO extends DAO {
 			String lastname) throws SQLException, ClassNotFoundException {
 
 		
-		String query = "SELECT DISTINCT stage.stageNr, stage.stagename, stage.size"
-				+ " FROM stage WHERE stage.stageNr IN (SELECT stage.stageNr FROM stage INNER JOIN lineup"
+		String query = "SELECT DISTINCT person.personID, person.firstname, person.lastname, stage.stageNr, stage.stagename, stage.size, band.bandName, band.performanceStart, band.performanceEnd"
+				+ " FROM stage INNER JOIN lineup"
 				+ " ON stage.stageNr = lineup.stageNr INNER JOIN band ON lineup.bandID = band.bandID"
 				+ " INNER JOIN timetable ON timetable.bandID = band.bandID INNER JOIN visitor"
 				+ " ON timetable.visitorID = visitor.visitorID INNER JOIN Person ON visitor.visitorID = person.personID"
-				+ " WHERE person.firstname = ? AND person.lastname = ?);";
+				+ " WHERE person.firstname = ? AND person.lastname = ?"
+				+ " ORDER BY person.personID, stage.stageNr, band.performanceStart;";
 
 		Connection con = getConnection();
 		// con.setAutoCommit(false);
@@ -33,9 +34,15 @@ public class StageDAO extends DAO {
 
 		while (rs.next()) {
 			StageBean stage = new StageBean();
+			stage.setPersID(rs.getString("personID"));
+			stage.setPersFirstName(rs.getString("firstname"));
+			stage.setPersLastName(rs.getString("lastname"));
 			stage.setStageID(rs.getInt("stagenr"));
 			stage.setName(rs.getString("stagename"));
 			stage.setSize(rs.getDouble("size"));
+			stage.setBandName(rs.getString("bandName"));
+			stage.setPerformanceStart(rs.getString("performanceStart"));
+			stage.setPerformanceEnd(rs.getString("performanceEnd"));
 			stagelist.setChild(stage);
 		}
 

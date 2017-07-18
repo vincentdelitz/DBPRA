@@ -1,15 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- <jsp:useBean id="bean" scope="request" class="de.tum.in.dbpra.model.bean.ProductListBean"></jsp:useBean>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="de.tum.in.dbpra.model.bean.offerBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Insert a new product</title>
+      <title>Where is the product I need?</title>
       <!-- Bootstrap -->
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-</head>
+   </head>
 <body>
       <nav class="navbar navbar-default">
          <div class="container-fluid">
@@ -47,54 +49,55 @@
          </div>
          <!-- /.container-fluid -->
       </nav>
-
-
-<h3>Which Product do you like to offer in your shop?</h3>
-
-</br>
-<% if (request.getAttribute("error") != null) { %>
-	<!--h1>Nothing found!</h1-->
-	<%! String s1 = ""; %>
-	<% s1 = (String) request.getAttribute("error");%>
-	<script type="text/javascript">
-	function alertName(){
-	var str="<%=s1%>";
-	alert("An error has occured: " + str);
-	} 
-	</script>
-	<script type="text/javascript"> window.onload = alertName; </script>
-	<!--%= request.getAttribute("error") %-->
-
-	<% }  %>
-        <div class="box">
-		<table  class="table table-striped">
-			<tr>
-				<th>Name</th>
-				<th>ProductID</th>
-				<th>Type</th>
-				<th>Price</th>
-			</tr>
-			<%
-				for (int i = 0; i < bean.getList().size(); i++) {
-			%>
-			<tr>
-				<td><a href="./InsertProductServlet2?productID=<%=bean.getChild(i).getProductID()%>"><%=bean.getChild(i).getName()%></a></td>
-				<td><%=bean.getChild(i).getProductID()%></td>
-				<td><%=bean.getChild(i).getType()%></td>
-				<td><%=bean.getChild(i).getPrice()%></td>
-			</tr>
-			<%
-				}
-			%>
-		</table>
-	</div>
-</div>
-<h5>The Product you want to offer is not in the list?</h5>
-<a href="./InsertProductServlet3">Insert new Product into the database!</a>
-
-        	
-
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<%--check if there is an error when searching for the offers
+		If yes, just return "offers not found" and the page is done
+		If no, go ahead--%>
+		<%
+			if (request.getAttribute("error") != null) {
+		%>
+		<h3><%=request.getAttribute("error") %></h3>
+	<%
+		} else {
+	%>
+	<%-- get the list of offers--%>
+	<table class="table table-striped">
+		<caption><h1>Offers</h1></caption>
+	<%
+		ArrayList<offerBean> offers = (ArrayList<offerBean>) request
+					.getAttribute("offer");
+	%>
+	<%-- output the results --%>
+	<tr>
+	<%--the headlines for each columns --%>
+		<th>productID</th>
+		<th>Product Name</th>
+		<th>AreaID</th>
+		<th>Area Name</th>
+		<th>ShopID</th>
+		<th>Quantity</th>
+	</tr>
+	<%
+		for (int i = 0; i < offers.size(); i++) {
+	%>
+	<tr>
+		<td><%=offers.get(i).getProductID()%></td>
+		<td><%=offers.get(i).getPname()%></td>
+		<td><%=offers.get(i).getAreaID()%></td>
+		<td><%=offers.get(i).getAreaname()%></td>
+		<td><%=offers.get(i).getShopID()%></td>
+		<td><%=offers.get(i).getQuantity()%></td>
+	</tr>
+	<%
+		}
+	%>
+	</table>
+	<%
+		}
+	%>
+	<%-- go back --%>
+	<a href="./SearchProduct.jsp">find some other products :)</a>
+	<a href="./index.htm">back</a>
+	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="bootstrap/js/bootstrap.min.js"></script>

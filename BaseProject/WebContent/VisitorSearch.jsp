@@ -12,7 +12,7 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-default">
+      <nav class="navbar navbar-default">
          <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -22,16 +22,16 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="#">Festival</a>
+               <a class="navbar-brand" href="./index.htm">Festival</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav">
                   <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Organiser <span class="caret"></span></a>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee <span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                        <li><a href="#">Sequence Diagram 1</a></li>
-                        <li><a href="#">Sequence Diagram 2</a></li>
+                        <li><a href="./ShiftServlet">Search Shifts</a></li>
+			<li><a href="./insertProduct">Insert new product</a></li>
                      </ul>
                   </li>
                   <li class="dropdown">
@@ -39,13 +39,7 @@
                      <ul class="dropdown-menu">
                         <li><a href="#">Activity Diagram</a></li>
                         <li><a href="./stage">Search personal stages</a></li>
-                     </ul>
-                  </li>
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Homework Example <span class="caret"></span></a>
-                     <ul class="dropdown-menu">
-                        <li><a href="./order">Exercise 7.2</a></li>
-                        <li><a href="./part">Exercise 7.3</a></li>
+			<li><a href="./SearchProduct.jsp">Search for a product</a></li>
                      </ul>
                   </li>
                </ul>
@@ -55,6 +49,8 @@
          <!-- /.container-fluid -->
       </nav>
 
+<h4>Here you can search for the stages that a certain visitor will see. Please enter exact values for the first and last name, as it is also case sensitive.</h4>
+	
 
 	<form method="post">
 		<label for="firstname">First name visitor</label>
@@ -74,18 +70,30 @@
         		<div class="box">
 		<table  class="table table-striped">
 			<tr>
+				<th>Visitor ID</th>
+				<th>Firstname of Visitor</th>
+				<th>Lastname of Visitor</th>
 				<th>StageID</th>
 				<th>Name</th>
 				<th>Size</th>
+				<th>Name of Band</th>
+				<th>Performance Start</th>
+				<th>Performance End</th>
 				</tr>
 			<%
 				for (int i = 0; i < bean.getList().size(); i++) {
 			%>
 			<tr>
 
+				<td><%=bean.getChild(i).getPersID()%></td>
+				<td><%=bean.getChild(i).getPersFirstName()%></td>
+				<td><%=bean.getChild(i).getPersLastName()%></td>
 				<td><%=bean.getChild(i).getStageID()%></td>
 				<td><%=bean.getChild(i).getName()%></td>
 				<td><%=bean.getChild(i).getSize()%></td>
+				<td><%=bean.getChild(i).getBandName()%></td>
+				<td><%=bean.getChild(i).getPerformanceStart()%></td>
+				<td><%=bean.getChild(i).getPerformanceEnd()%></td>
 			</tr>
 			<%
 				}
