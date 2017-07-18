@@ -25,13 +25,16 @@ public class LocationServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String pname = (String) request.getParameter("name");
 		try {
-			// locationDAO dao = new locationDAO();
-			//get the result set
-			// ArrayList<locationBean> locations = dao.getLocation(pname);
-			//set the attribute of the request to pass it to jsp
-			// request.setAttribute("locations", locations);
+			if (request.getParameter("product_id") != null &&
+					request.getParameter("shop_id") != null {
+				locationDAO dao = new locationDAO();
+				ArrayList<LocationBean> locations = new ArrayList<LocationBean>();
+				String productId = request.getParameter("product_id");
+				String shopId = request.getParameter("shop_id");
+				dao.getShopDetails(locations, product_id, shop_id);
+				request.setAttribute("locations", locations);
+			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 			request.setAttribute("error", e.getMessage());
