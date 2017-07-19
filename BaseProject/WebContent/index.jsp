@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -9,7 +11,7 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
    </head>
    <body>
-      <%@ include file = "./header.jsp" >
+      <%@include file="./header.jsp" %>
       <div class="container">
          <div class="starter-template">
             <h1>Welcome on the Database Management System of the festival Tomorrowland</h1>
