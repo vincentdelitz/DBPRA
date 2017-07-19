@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="de.tum.in.dbpra.model.bean.offerBean"%>
+<%@ page import="de.tum.in.dbpra.model.bean.LocationBean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,7 +38,7 @@
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitor <span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                        <li><a href="#">Activity Diagram</a></li>
+                        <li><a href="./SearchProduct.jsp">Activity Diagram</a></li>
                         <li><a href="./stage">Search personal stages</a></li>
 			<li><a href="./SearchProduct.jsp">Search for a product</a></li>
                      </ul>
@@ -60,41 +60,34 @@
 		} else {
 	%>
 	<%-- get the list of offers--%>
-	<table class="table table-striped">
-		<caption><h1>Offers</h1></caption>
+	<h1>You can find this item in the shops below.</h1>
 	<%
-		ArrayList<offerBean> offers = (ArrayList<offerBean>) request
-					.getAttribute("offer");
+		ArrayList<LocationBean> locations = (ArrayList<LocationBean>) request
+					.getAttribute("locations");
 	%>
 	<%-- output the results --%>
-	<tr>
-	<%--the headlines for each columns --%>
-		<th></th>
-		<th>productID</th>
-		<th>Product Name</th>
-		<th>AreaID</th>
-		<th>Area Name</th>
-		<th>ShopID</th>
-		<th>Quantity</th>
-	</tr>
 	<%
-		for (int i = 0; i < offers.size(); i++) {
+		for (int i = 0; i < locations.size(); i++) {
 	%>
 	
-	<tr>
-		<td><a href="./locationServlet?product_id=<%=offers.get(i).getProductID()%>&shop_id=<%=offers.get(i).getShopID()%>">See Location</a></td>
-		<td><%=offers.get(i).getProductID()%></td>
-		<td><%=offers.get(i).getPname()%></td>
-		<td><%=offers.get(i).getAreaID()%></td>
-		<td><%=offers.get(i).getAreaname()%></td>
-		<td><%=offers.get(i).getShopID()%></td>
-		<td><%=offers.get(i).getQuantity()%></td>
-	</tr>
+	<p class="lead">
+		<div><strong>Product Name:</strong>
+		<span><%=locations.get(i).getName()%></span>
+		</div><br />
+		<div><strong>Area Name:</strong>
+		<span><%=locations.get(i).getAreaName()%></span>
+		</div><br />
+		<div><strong>Type of the Area:</strong>
+		<span><%=locations.get(i).getType()%></span>
+		</div><br />
+		<div><strong>Type of the Shop:</strong>
+		<span><%=locations.get(i).getShopType()%></span>
+		</div>
+	</p>
 	
 	<%
 		}
 	%>
-	</table>
 	<%
 		}
 	%>

@@ -7,6 +7,8 @@ public class Config {
 		public static final String PORT = "5432";
 		public static final String DB = "Festival Database";
 		public static final String USER = "postgres";
-		public static final String PASS = "mz1234";
+
+		public static final String PASS = "postgres";
+
 	}
 }
