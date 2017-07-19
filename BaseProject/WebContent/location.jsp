@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-   <head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="de.tum.in.dbpra.model.bean.LocationBean"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Festival Database</title>
+      <title>Where is the product I need?</title>
       <!-- Bootstrap -->
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
    </head>
-   <body>
+<body>
       <nav class="navbar navbar-default">
          <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,23 +49,54 @@
          </div>
          <!-- /.container-fluid -->
       </nav>
-      <div class="container">
-         <div class="starter-template">
-            <h1>Welcome on the Database Management System of the festival Tomorrowland</h1>
-            <p class="lead">The database management system was developed in the practical course databases in the summer semester 2017 at TU München. The collaborators for this project are:</p>
-		<ul class="list-group">
-  			<li class="list-group-item">Milena Zurmühl</li>
-  			<li class="list-group-item">Emir Demirdag</li>
-  			<li class="list-group-item">Danyang He</li>
-			<li class="list-group-item">Bruno Fiumano</li>
-  			<li class="list-group-item">Moritz Gottelt</li>
-  			<li class="list-group-item">Vincent Delitz</li>
-		</ul>
-         </div>
-      </div>
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<%--check if there is an error when searching for the offers
+		If yes, just return "offers not found" and the page is done
+		If no, go ahead--%>
+		<%
+			if (request.getAttribute("error") != null) {
+		%>
+		<h3><%=request.getAttribute("error") %></h3>
+	<%
+		} else {
+	%>
+	<%-- get the list of offers--%>
+	<h1>You can find this item in the shops below.</h1>
+	<%
+		ArrayList<LocationBean> locations = (ArrayList<LocationBean>) request
+					.getAttribute("locations");
+	%>
+	<%-- output the results --%>
+	<%
+		for (int i = 0; i < locations.size(); i++) {
+	%>
+	
+	<p class="lead">
+		<div><strong>Product Name:</strong>
+		<span><%=locations.get(i).getName()%></span>
+		</div><br />
+		<div><strong>Area Name:</strong>
+		<span><%=locations.get(i).getAreaName()%></span>
+		</div><br />
+		<div><strong>Type of the Area:</strong>
+		<span><%=locations.get(i).getType()%></span>
+		</div><br />
+		<div><strong>Type of the Shop:</strong>
+		<span><%=locations.get(i).getShopType()%></span>
+		</div>
+	</p>
+	
+	<%
+		}
+	%>
+	<%
+		}
+	%>
+	<%-- go back --%>
+	<a href="./SearchProduct.jsp">find some other products :)</a>
+	<a href="./index.htm">back</a>
+	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="bootstrap/js/bootstrap.min.js"></script>
-   </body>
+</body>
 </html>
