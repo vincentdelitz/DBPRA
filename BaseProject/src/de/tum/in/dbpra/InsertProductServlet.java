@@ -45,7 +45,7 @@ public class InsertProductServlet extends HttpServlet {
 			e.printStackTrace();
     		request.setAttribute("error", e.toString() + e.getMessage());
 		}	
-		RequestDispatcher dispatcher = request.getRequestDispatcher("insertProduct.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/insertProduct.jsp");
 		dispatcher.forward(request, response);
 	}
 
