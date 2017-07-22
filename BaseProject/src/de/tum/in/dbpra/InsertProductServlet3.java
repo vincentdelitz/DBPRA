@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sun.corba.se.pept.transport.Connection;
 
-import de.tum.in.dbpra.model.bean.CustomerBean;
 import de.tum.in.dbpra.model.bean.ProductListBean;
-import de.tum.in.dbpra.model.dao.CustomerDAO;
 import de.tum.in.dbpra.model.dao.DAO;
 import de.tum.in.dbpra.model.dao.OfferDAO;
 import de.tum.in.dbpra.model.dao.ProductDAO;
@@ -80,10 +78,6 @@ public class InsertProductServlet3 extends HttpServlet {
 						
 			SuperDAO sup = new SuperDAO();
 			sup.insertProductAndOffer(quantity, shopID, name, type, price);
-//			int productID = product.insertProduct(request.getParameter("name"), request.getParameter("producttype"), Double.parseDouble(request.getParameter("price")));
-//			
-//			OfferDAO offer = new OfferDAO();
-//			offer.insertOffer(productID, shopID, quantity);
 			
 			ProductListBean productList = new ProductListBean();
 			ProductDAO product = new ProductDAO();

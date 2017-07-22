@@ -14,8 +14,7 @@
 <body>
 <%@include file="./header.jsp" %>
 
-<h2>Stages and corresponding music acts</h2>
-<h4>Here you can search for the stages that a certain visitor will see while watching his acts. Please enter exact values for the first and last name, as it is also case sensitive.</h4>
+<h4>Here you can search for the stages that a certain visitor will see. Please enter exact values for the first and last name, as it is also case sensitive.</h4>
 	
 
 	<form method="post">
@@ -29,18 +28,10 @@
 	</form>
 </br>
 <% if (request.getAttribute("error") != null) { %>
-	
- 	<%! String s1 = ""; %>
- 	<% s1 = (String) request.getAttribute("error");%>
- 	<script type="text/javascript">
- 	function alertName(){
- 	var str="<%=s1%>";
- 	alert("An error has occured: " + str);
- 	} 
- 	</script>
- 	<script type="text/javascript"> window.onload = alertName; </script>
+	<h1>Nothing found!</h1>
+	<%= request.getAttribute("error") %>
 
-	<% } else if(bean.getList().size()!=0){ %>
+	<% } else { %>
         		<div class="box">
 		<table  class="table table-striped">
 			<tr>

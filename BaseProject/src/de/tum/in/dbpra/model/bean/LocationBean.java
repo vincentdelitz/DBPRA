@@ -1,23 +1,65 @@
 package de.tum.in.dbpra.model.bean;
 
 public class LocationBean {
+  
+  private String productName;
+  private int shopID;
+  private String shopType;
+  private int areaID;
+  private String areaName;
+  private String areaType;
+  
   public LocationBean() {}
 
-  private String name;
-  private String type;
-  private String shoptype;
-  private String areaname;
-  
-  public String getName() {return name;}
-  public void setName(String name) {this.name = name;}
+  public String getProductName() {
+		return productName;
+	}
 
-  public String getType() {return type;}
-  public void setType(String type) {this.type = type;}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
-  public String getAreaName() {return areaname;}
-  public void setAreaName(String areaname) {this.areaname = areaname;}
-  
-  public String getShopType() {return shoptype;}
-  public void setShopType(String shoptype) {this.shoptype = shoptype;}
+	public int getShopID() {
+		return shopID;
+	}
+
+	public void setShopID(int shopID) {
+		this.shopID = shopID;
+	}
+
+	public String getShopType() {
+		return shopType;
+	}
+
+	public void setShopType(String shopType) {
+		this.shopType = shopType;
+	}
+
+	public int getAreaID() {
+		return areaID;
+	}
+
+	public void setAreaID(int areaID) {
+		this.areaID = areaID;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
+	public String getAreaType() {
+		return areaType;
+	}
+
+	public void setAreaType(String areaType) {
+		this.areaType = areaType;
+	}
+
+	  
+
   
 }
