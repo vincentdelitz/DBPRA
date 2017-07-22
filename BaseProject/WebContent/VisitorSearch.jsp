@@ -49,7 +49,8 @@
          <!-- /.container-fluid -->
       </nav>
 
-<h4>Here you can search for the stages that a certain visitor will see. Please enter exact values for the first and last name, as it is also case sensitive.</h4>
+<h2>Stages and corresponding music acts</h2>
+<h4>Here you can search for the stages that a certain visitor will see while watching his acts. Please enter exact values for the first and last name, as it is also case sensitive.</h4>
 	
 
 	<form method="post">
@@ -63,10 +64,18 @@
 	</form>
 </br>
 <% if (request.getAttribute("error") != null) { %>
-	<h1>Nothing found!</h1>
-	<%= request.getAttribute("error") %>
+	
+ 	<%! String s1 = ""; %>
+ 	<% s1 = (String) request.getAttribute("error");%>
+ 	<script type="text/javascript">
+ 	function alertName(){
+ 	var str="<%=s1%>";
+ 	alert("An error has occured: " + str);
+ 	} 
+ 	</script>
+ 	<script type="text/javascript"> window.onload = alertName; </script>
 
-	<% } else { %>
+	<% } else if(bean.getList().size()!=0){ %>
         		<div class="box">
 		<table  class="table table-striped">
 			<tr>
