@@ -58,7 +58,7 @@ public class StageServlet extends HttpServlet {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-    		request.setAttribute("error", e.toString() + e.getMessage());
+    		request.setAttribute("error", e.getMessage());
 		}
 		
 
