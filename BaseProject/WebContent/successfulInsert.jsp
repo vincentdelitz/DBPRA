@@ -15,7 +15,16 @@
 
 
 <% if (request.getAttribute("error") != null) { %>
-	<%= request.getAttribute("error") %>
+	<%! String s1 = ""; %>
+	<% s1 = (String) request.getAttribute("error");%>
+	<script type="text/javascript">
+	function alertName(){
+	var str="<%=s1%>";
+	alert("An error has occured: " + str);
+	} 
+	</script>
+	<script type="text/javascript"> window.onload = alertName; </script>
+	<!--%= request.getAttribute("error") %-->
 
 	<% }  else { %>
         <h1>Your Product has been successfully inserted!</h1>

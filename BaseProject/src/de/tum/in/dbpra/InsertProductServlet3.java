@@ -47,11 +47,35 @@ public class InsertProductServlet3 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
-		int shopID = Integer.parseInt(request.getParameter("shopID"));
+		int quantity = 0;
+		try {
+		quantity = Integer.parseInt(request.getParameter("quantity"));
+		} catch (Exception e) {
+			request.setAttribute("error", "Invalid parameter (quantity)");
+		}
+		int shopID = 0;
+		try {
+		shopID = Integer.parseInt(request.getParameter("shopID"));
+		} catch (Exception e) {
+			request.setAttribute("error", "Invalid parameter (shopID)");
+		}
+		
 		String name = request.getParameter("name");
 		String type = request.getParameter("producttype");
-		double price = Double.parseDouble(request.getParameter("price"));
+		
+		Double price = 1.00;
+		try {
+			price = Double.parseDouble(request.getParameter("price"));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+    		request.setAttribute("error", "Invalid decimal (price)");
+		}
+		String[] splitter = price.toString().split("\\.");
+		int decimalLength = splitter[1].length();  // After Decimal Count
+		if (decimalLength > 2) {
+    		request.setAttribute("error", "Invalid decimal (price): too many decimals specified");
+		}
+		
 		try {
 						
 			SuperDAO sup = new SuperDAO();
