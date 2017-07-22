@@ -82,6 +82,17 @@ public class ProductDAO extends DAO {
 
 		ResultSet rs = 	pstmt2.executeQuery();
 		
+		if(price<=0) {
+			throw new SQLException("Price must be more than 0");
+		}
+		if(price>=10000) {
+			throw new SQLException("Price must be less than 10000");
+		}
+		if(name==""||name==null) {
+			throw new SQLException("Please enter a name");
+		}
+		
+		
 		if (rs.next()){
 			throw new ProductExistsException("The Product " + name + " you want to insert does already exist!");
 		} else {
