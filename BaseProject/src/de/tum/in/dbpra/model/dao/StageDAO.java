@@ -27,6 +27,14 @@ public class StageDAO extends DAO {
 
 		PreparedStatement pstmt = con.prepareStatement(query);
 		
+		if(lastname.equals("")||lastname.equals(null)){
+			throw new SQLException("Please enter a last name");
+		}
+		
+		if(firstname.equals("")||firstname.equals(null)){
+			throw new SQLException("Please enter a first name");
+		}
+		
 		pstmt.setString(1, firstname);
 		pstmt.setString(2, lastname);
 
