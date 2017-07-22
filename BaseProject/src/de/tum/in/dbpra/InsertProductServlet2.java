@@ -46,8 +46,23 @@ public class InsertProductServlet2 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int shopID = Integer.parseInt(request.getParameter("shopID"));
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		int quantity = 0;
+		try {
+		quantity = Integer.parseInt(request.getParameter("quantity"));
+		} catch (Exception e) {
+			request.setAttribute("error", "Invalid parameter (quantity)");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/enterShopID.jsp");
+			dispatcher.forward(request, response);
+		}
+		int shopID = 0;
+		try {
+		shopID = Integer.parseInt(request.getParameter("shopID"));
+		} catch (Exception e) {
+			request.setAttribute("error", "Invalid parameter (shopID)");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/enterShopID.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 		int productID = Integer.parseInt(request.getParameter("productID"));
 		try {
 			OfferDAO offer = new OfferDAO();
@@ -58,13 +73,24 @@ public class InsertProductServlet2 extends HttpServlet {
 			product.getProductsForShop(productList, shopID);
 			request.setAttribute("bean",productList);
 
-			
 		} catch (Throwable e) {
-			e.printStackTrace();
-			request.setAttribute("error", e.getMessage());
+			String errormessage = e.getMessage();
+			if (errormessage == "error1") {
+				request.setAttribute("error", "There is no Shop with ID: " + shopID + "!");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/enterShopID.jsp");
+				dispatcher.forward(request, response);
+			} else if (errormessage == "error2") {
+				request.setAttribute("error", "You already offer that Product");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/insertProduct.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				request.setAttribute("error", errormessage);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("successfulInsert.jsp");
+				dispatcher.forward(request, response);
+			}
+
 		} 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("successfulInsert.jsp");
-		dispatcher.forward(request, response);
+		
 	}
 
 }

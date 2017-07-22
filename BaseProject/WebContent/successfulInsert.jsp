@@ -19,11 +19,13 @@
 	<% s1 = (String) request.getAttribute("error");%>
 	<script type="text/javascript">
 	function alertName(){
-	var str="<%=s1%>";
-	alert("An error has occured: " + str);
+		var str="<%=s1%>";
+		alert("An error has occured: " + str);
 	} 
 	</script>
-	<script type="text/javascript"> window.onload = alertName; </script>
+	<script type="text/javascript"> 
+		window.onload = alertName; 
+	</script>
 	<!--%= request.getAttribute("error") %-->
 
 	<% }  else { %>

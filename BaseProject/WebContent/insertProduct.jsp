@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  <jsp:useBean id="bean" scope="request" class="de.tum.in.dbpra.model.bean.ProductListBean"></jsp:useBean>
+<%@ page import="de.tum.in.dbpra.model.bean.ProductListBean" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,7 +41,7 @@
 				<th>Type</th>
 				<th>Price</th>
 			</tr>
-			<%
+			<% bean = (ProductListBean) session.getAttribute("bean");
 				for (int i = 0; i < bean.getList().size(); i++) {
 			%>
 			<tr>

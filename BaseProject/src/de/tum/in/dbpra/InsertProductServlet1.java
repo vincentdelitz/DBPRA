@@ -36,11 +36,12 @@ public class InsertProductServlet1 extends HttpServlet {
 			ProductDAO product = new ProductDAO();
 			ProductListBean productlist = new ProductListBean();
 			product.getProducts(productlist);
-			request.setAttribute("bean",productlist);
+			HttpSession session = request.getSession();
+			session.setAttribute("bean",productlist);
 
 		} catch (Throwable e) {
 			e.printStackTrace();
-    		request.setAttribute("error", e.toString() + e.getMessage());
+    		request.setAttribute("error", e.getMessage());
 		}	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/insertProduct.jsp");
 		dispatcher.forward(request, response);

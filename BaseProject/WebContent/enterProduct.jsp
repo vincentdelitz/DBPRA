@@ -11,9 +11,24 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<%@include file="./header.jsp" %>
 
-<h3>Please insert your Product Details!</h3>
+	<%@include file="./header.jsp" %>
+	<% if (request.getAttribute("error") != null) { %>
+		<%! String s1 = ""; %>
+		<% s1 = (String) request.getAttribute("error");%>
+		<script type="text/javascript">
+			function alertName() {
+				var str="<%=s1%>";
+				alert("An error has occured: " + str);
+		} 
+		</script>
+		<script type="text/javascript"> 
+			window.onload = alertName; 
+		</script>
+		<!--%= request.getAttribute("error") %-->
+	<% } %>
+	
+	<h3>Please insert your Product Details!</h3>
 	
 	<form method="post">
 		<label for="name">Product name</label>
@@ -41,6 +56,9 @@
 	
 		<input type="submit" value="Insert" />
 	</form>
+	<br>
+	
+	<a href="insertProduct.jsp">BACK</a>
 	
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

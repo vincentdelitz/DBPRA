@@ -23,7 +23,7 @@ public class OfferDAO extends DAO {
 		ResultSet rs2 = pstmt2.executeQuery();
 		
 		if (!rs2.next()){
-			throw new ShopNotExistsException("There is no Shop with ID: " + shopID + "!");
+			throw new ShopNotExistsException("error1");
 		} else {
 		
 			PreparedStatement pstmt1 = con.prepareStatement(query1);		
@@ -33,7 +33,7 @@ public class OfferDAO extends DAO {
 			ResultSet rs = pstmt1.executeQuery();
 			
 			if (rs.next()){
-				throw new OfferExistsException("You already offer that Product!");
+				throw new OfferExistsException("error2");
 			} else {
 				PreparedStatement pstmt = con.prepareStatement(query);
 				
@@ -65,7 +65,7 @@ public class OfferDAO extends DAO {
 		ResultSet rs2 = pstmt2.executeQuery();
 		
 		if (!rs2.next()){
-			throw new ShopNotExistsException("There is no Shop with ID: " + shopID + "!");
+			throw new ShopNotExistsException("error1");
 		} else {
 		
 			PreparedStatement pstmt1 = con.prepareStatement(query1);		
@@ -75,7 +75,7 @@ public class OfferDAO extends DAO {
 			ResultSet rs = pstmt1.executeQuery();
 			
 			if (rs.next()){
-				throw new OfferExistsException("You already offer that Product!");
+				throw new OfferExistsException("error2");
 			} else {
 				PreparedStatement pstmt = con.prepareStatement(query);
 				
