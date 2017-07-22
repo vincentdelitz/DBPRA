@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import de.tum.in.dbpra.model.bean.ShiftBean;
 import de.tum.in.dbpra.model.dao.ShiftDAO;
@@ -16,23 +17,23 @@ import de.tum.in.dbpra.model.dao.ShiftDAO;
 /**
  * Servlet implementation class ShiftServlet
  */
-@WebServlet("/ShiftServlet2")
-public class ShiftServlet2 extends HttpServlet {
+@WebServlet("/ShiftServlet1")
+public class ShiftServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShiftServlet2() {
+    public ShiftServlet1() {
         super();
         // TODO Auto-generated constructor stub
     }
- 
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/ShiftSearchByID.jsp");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/ShiftSearchByName.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -45,14 +46,14 @@ public class ShiftServlet2 extends HttpServlet {
         	ArrayList <ShiftBean> shiftList = new ArrayList <ShiftBean>();
         	String firstname = request.getParameter("firstname");
         	String lastname = request.getParameter("lastname");
-        	if (request.getParameter("personID") == "") {
-        		dao.getShiftByName(shiftList, firstname, lastname);
-        		request.setAttribute("shiftList", shiftList);
-        	} else {
-        		int ID = Integer.parseInt(request.getParameter("personID"));
-            	dao.getShiftByID(shiftList, ID, firstname, lastname);
-            	request.setAttribute("shiftList", shiftList);
-        	}
+
+        	HttpSession session = request.getSession();
+        	session.setAttribute("firstname", firstname);
+        	session.setAttribute("lastname", lastname);
+        	
+        	
+        	dao.getShiftByName(shiftList, firstname, lastname);
+        	request.setAttribute("shiftList", shiftList);
         	RequestDispatcher dispatcher = request.getRequestDispatcher("/ShiftView.jsp");
     		dispatcher.forward(request, response);
         	
@@ -67,18 +68,14 @@ public class ShiftServlet2 extends HttpServlet {
     			request.setAttribute("error2", e.getMessage());
     			RequestDispatcher dispatcher = request.getRequestDispatcher("/ShiftSearchByID.jsp");
         		dispatcher.forward(request, response);
-    		} else if (errormessage == "error3") {
-    			request.setAttribute("error3", e.getMessage());
-    			RequestDispatcher dispatcher = request.getRequestDispatcher("/ShiftSearchByID.jsp");
-    			dispatcher.forward(request, response);
     		}
     		else {
     			request.setAttribute("error", e.getMessage());
     			RequestDispatcher dispatcher = request.getRequestDispatcher("/ShiftView.jsp");
-    			dispatcher.forward(request, response);
+        		dispatcher.forward(request, response);
     		}
+    		
     	}
-
+		
 	}
-
 }

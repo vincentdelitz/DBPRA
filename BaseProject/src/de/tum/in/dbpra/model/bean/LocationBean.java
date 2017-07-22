@@ -5,6 +5,7 @@ public class LocationBean {
 
   private String name;
   private String type;
+  private int shopID;
   private String shoptype;
   private String areaname;
   
@@ -19,5 +20,8 @@ public class LocationBean {
   
   public String getShopType() {return shoptype;}
   public void setShopType(String shoptype) {this.shoptype = shoptype;}
+  
+  public int getShopID() {return shopID; }
+  public void setShopID(int shopID) {this.shopID = shopID;}
   
 }

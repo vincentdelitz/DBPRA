@@ -11,18 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import de.tum.in.dbpra.model.bean.CustomerBean;
-import de.tum.in.dbpra.model.bean.PartListBean;
 import de.tum.in.dbpra.model.bean.StageBean;
 import de.tum.in.dbpra.model.bean.StageListBean;
-import de.tum.in.dbpra.model.dao.CustomerDAO;
-import de.tum.in.dbpra.model.dao.PartDAO;
 import de.tum.in.dbpra.model.dao.StageDAO;
 
 /**
  * Servlet implementation class StageServlet
  */
-@WebServlet("/stage")
+@WebServlet("/StageServlet")
 public class StageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
