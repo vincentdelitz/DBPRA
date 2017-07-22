@@ -11,16 +11,21 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
    </head>
 <body>
-<%@include file="./header.jsp" %>
+	<%@include file="./header.jsp" %>
 
-<h4>Please insert the name of the product that you want to search for. The search value does not need to be exact, as it also searches for similar values.</h4>
-<%-- input the productID--%>
-		<form action="offerServlet" method="POST">
-			Product Name:<input type="text" name="name"/> <input type="submit" VALUE="submit" />
-		</form>
-		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="bootstrap/js/bootstrap.min.js"></script>
+	<h4>Please insert the name of the product that you want to search for. The search value does not need to be exact, as it also searches for similar values.</h4>
+	<%-- input the productID--%>
+	
+	<form action="./OfferProductServlet" method="POST">
+		Product Name:<input type="text" name="name"/> <input type="submit" VALUE="submit" />
+	</form>
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+
+

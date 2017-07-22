@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sun.corba.se.pept.transport.Connection;
 
-import de.tum.in.dbpra.model.bean.CustomerBean;
 import de.tum.in.dbpra.model.bean.ProductListBean;
-import de.tum.in.dbpra.model.dao.CustomerDAO;
 import de.tum.in.dbpra.model.dao.DAO;
 import de.tum.in.dbpra.model.dao.OfferDAO;
 import de.tum.in.dbpra.model.dao.ProductDAO;
