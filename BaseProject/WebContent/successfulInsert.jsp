@@ -14,23 +14,14 @@
 <%@include file="./header.jsp" %>
 
 
-<h3>Which Product do you like to offer in your shop?</h3>
-
-</br>
 <% if (request.getAttribute("error") != null) { %>
-	<!--h1>Nothing found!</h1-->
-	<%! String s1 = ""; %>
-	<% s1 = (String) request.getAttribute("error");%>
-	<script type="text/javascript">
-	function alertName(){
-	var str="<%=s1%>";
-	alert("An error has occured: " + str);
-	} 
-	</script>
-	<script type="text/javascript"> window.onload = alertName; </script>
-	<!--%= request.getAttribute("error") %-->
+	<%= request.getAttribute("error") %>
 
-	<% }  %>
+	<% }  else { %>
+        <h1>Your Product has been successfully inserted!</h1>
+        <br> 
+        <h7>You now offer the following Products in your shop</h7>
+        
         <div class="box">
 		<table  class="table table-striped">
 			<tr>
@@ -43,7 +34,7 @@
 				for (int i = 0; i < bean.getList().size(); i++) {
 			%>
 			<tr>
-				<td><a href="./InsertProductServlet2?productID=<%=bean.getChild(i).getProductID()%>"><%=bean.getChild(i).getName()%></a></td>
+				<td><%=bean.getChild(i).getName()%></td>
 				<td><%=bean.getChild(i).getProductID()%></td>
 				<td><%=bean.getChild(i).getType()%></td>
 				<td><%=bean.getChild(i).getPrice()%></td>
@@ -54,8 +45,7 @@
 		</table>
 	</div>
 </div>
-<h5>The Product you want to offer is not in the list?</h5>
-<a href="./InsertProductServlet3">Insert new Product into the database!</a>
+<% }   %>
 
         	
 
