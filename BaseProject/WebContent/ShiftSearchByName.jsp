@@ -15,10 +15,12 @@
 	<% if (request.getAttribute("error1") != null) { %>
 		<h3>There is no employee with the following name: <%=request.getParameter("firstname")%> <%=request.getParameter("lastname")%></h3>
 		<br>
-		<h4>Try again</h4>
+		<h4>Try again! Please enter exact values for the first and last name, as it is also case sensitive.</h4>
 		<br>
 	<% } else { %>
 		<h1>Please enter your name to search for your shifts</h1>
+		<br>
+		<h4>Please enter exact values for the first and last name, as it is also case sensitive.</h4>
 		<br>
 	<% } %>
 	<form method="post">
