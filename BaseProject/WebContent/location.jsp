@@ -23,7 +23,7 @@
 	<% } else { %>
 		<%-- get the list of offers--%>
 		<% ArrayList<LocationBean> locations = (ArrayList<LocationBean>) request.getAttribute("locations"); %>
-		<h1>You can find <%=locations.get(0).getName()%> in the following shops:</h1>
+		<h1>You can find <%=locations.get(0).getProductName()%> in the following shops:</h1>
 		
 		<%-- output the results --%>
 		<% for (int i = 0; i < locations.size(); i++) { %>
@@ -37,13 +37,17 @@
 					<strong>Type of the Shop:</strong>
 					<span><%=locations.get(i).getShopType()%></span>
 				</div>
-				<div><br/>
+				<div>
 					<strong>Area Name:</strong>
 					<span><%=locations.get(i).getAreaName()%></span>
 				</div>
 				<div>
+					<strong>Area ID:</strong>
+					<span><%=locations.get(i).getAreaID()%></span>
+				</div>
+				<div>
 					<strong>Type of the Area:</strong>
-					<span><%=locations.get(i).getType()%></span>
+					<span><%=locations.get(i).getAreaType()%></span>
 				</div><br />
 
 			</p>

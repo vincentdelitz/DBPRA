@@ -10,7 +10,7 @@ import de.tum.in.dbpra.model.bean.LocationBean;
 
 public class LocationDAO extends DAO {
   public void getShopDetails(ArrayList<LocationBean> locations, int product_id, int shop_id) throws ClassNotFoundException, SQLException {
-    String query = "SELECT name, shoptype, offer.shopid, areaname, type FROM product " +
+    String query = "SELECT name, shoptype, offer.shopid, areaname, area.areaid, type FROM product " +
       "JOIN offer ON product.productid = offer.productid " +
       "JOIN shop ON offer.shopid = shop.shopid " +
       "JOIN area ON shop.areaid = area.areaid " +
@@ -25,10 +25,11 @@ public class LocationDAO extends DAO {
     
     while(rs.next()) {
       LocationBean location = new LocationBean();
-      location.setName(rs.getString("name"));
+      location.setProductName(rs.getString("name"));
       location.setShopType(rs.getString("shoptype"));
+      location.setAreaID(rs.getInt("areaid"));
       location.setAreaName(rs.getString("areaname"));
-      location.setType(rs.getString("type"));
+      location.setAreaType(rs.getString("type"));
       location.setShopID(rs.getInt("shopid"));
       locations.add(location);
     }
