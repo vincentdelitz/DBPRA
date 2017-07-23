@@ -14,6 +14,9 @@
    </head>
 <body>
 	<%@include file="./header.jsp" %>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10">
       
 	<%--check if there is an error when searching for the offers
 	If yes, just return "offers not found" and the page is done
@@ -23,40 +26,36 @@
 	<% } else { %>
 		<%-- get the list of offers--%>
 		<% ArrayList<LocationBean> locations = (ArrayList<LocationBean>) request.getAttribute("locations"); %>
-		<h1>You can find <%=locations.get(0).getProductName()%> in the following shops:</h1>
+		<h4>You can find <%=locations.get(0).getProductName()%> in the following shops:</h4>
 		
 		<%-- output the results --%>
 		<% for (int i = 0; i < locations.size(); i++) { %>
 	
-			<p class="lead">
-				<div>
-					<strong>Shop ID:</strong>
-					<span><%=locations.get(i).getShopID()%></span>
-				</div>
-				<div>
-					<strong>Type of the Shop:</strong>
-					<span><%=locations.get(i).getShopType()%></span>
-				</div>
-				<div>
-					<strong>Area Name:</strong>
-					<span><%=locations.get(i).getAreaName()%></span>
-				</div>
-				<div>
-					<strong>Area ID:</strong>
-					<span><%=locations.get(i).getAreaID()%></span>
-				</div>
-				<div>
-					<strong>Type of the Area:</strong>
-					<span><%=locations.get(i).getAreaType()%></span>
-				</div><br />
-
-			</p>
+			<dl class="dl-horizontal">
+					<dt>Shop ID:</dt>
+					<dd><%=locations.get(i).getShopID()%></dd>
+					<dt>Type of the Shop:</dt>
+					<dd><%=locations.get(i).getShopType()%></dd>
+					<dt>Area Name:</dt>
+					<dd><%=locations.get(i).getAreaName()%></dd>
+					<dt>Area ID:</dt>
+					<dd><%=locations.get(i).getAreaID()%></dd>
+					<dt>Type of the Area:</dt>
+					<dd><%=locations.get(i).getAreaType()%></dd>
+			</dl>
 	
 		<% } %>
 	<% } %>
+	</div>
+	</div>
 	<%-- go back --%>
-	<a href="./SearchProduct.jsp">Find some other products :)</a>
-
+		<div class="row">
+			<div class="col-md-2">
+			<a class="btn btn-primary" href="./SearchProduct.jsp" role="button">Back to Product Search</a>
+			</div>
+		</div>
+	</div>
+	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->

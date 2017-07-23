@@ -12,13 +12,25 @@
    </head>
 <body>
 	<%@include file="./header.jsp" %>
-
-	<h4>Please insert the name of the product that you want to search for. The search value does not need to be exact, as it also searches for similar values.</h4>
-	<%-- input the productID--%>
-	
-	<form action="./ProductServlet" method="GET">
-		Product Name:<input type="text" name="product_name"/> <input type="submit" VALUE="submit" />
-	</form>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h4>Please insert the name of the product that you want to search for. The search value does not need to be exact, as it also searches for similar values.</h4>
+				<%-- input the productID--%>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<form action="./ProductServlet" method="GET">
+					<div class="form-group">
+						<label for="product_name">Product Name</label>
+						<input type="text" class="form-control" id="product_name" name="product_name" placeholder="Enter product name" /> 
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
 	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -17,13 +17,15 @@
 </head>
 <body>
 <%@include file="./header.jsp" %>
-      
+      <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10">
 		<% if (request.getAttribute("error") != null) { %>
 		<h1>An error has occurred!</h1>
 		<%= request.getAttribute("error") %>
 				
 	<% } else { %>
-		<h3>This are your shifts <%=request.getParameter("firstname")%> <%=request.getParameter("lastname")%>!</h3>
+		<h3>This are your shifts, <strong><%=request.getParameter("firstname")%> <%=request.getParameter("lastname")%>!</strong></h3>
 		<br>
 		<table class="table table-striped">
  	       <thead>
@@ -49,9 +51,10 @@
 				<% } %>	
     		</tbody>
 		</table>
-		<br>
-		<br>
     <% } %>
+    	</div>
+    </div>
+</div>
     
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

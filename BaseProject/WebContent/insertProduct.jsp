@@ -14,11 +14,19 @@
 </head>
 <body>
 <%@include file="./header.jsp" %>
-
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10">
 
 <h3>Which Product do you like to offer in your shop?</h3>
 
-</br>
+<div class="row">
+<div class="col-md-10">
+	<h5>The Product you want to offer is not in the list?</h5>
+	<a class="btn btn-primary" href="./InsertProductServlet3">Insert New Product</a>
+	</div>
+</div>
+
 <% if (request.getAttribute("error") != null) { %>
 	<!--h1>Nothing found!</h1-->
 	<%! String s1 = ""; %>
@@ -33,7 +41,7 @@
 	<!--%= request.getAttribute("error") %-->
 
 	<% }  %>
-        <div class="box">
+        <div class="box" style="margin-top: 30px;">
 		<table  class="table table-striped">
 			<tr>
 				<th>Name</th>
@@ -55,11 +63,8 @@
 			%>
 		</table>
 	</div>
+	</div>
 </div>
-<h5>The Product you want to offer is not in the list?</h5>
-<a href="./InsertProductServlet3">Insert new Product into the database!</a>
-
-        	
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
