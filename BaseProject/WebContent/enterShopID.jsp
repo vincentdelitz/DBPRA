@@ -11,9 +11,23 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<%@include file="./header.jsp" %>
+	<%@include file="./header.jsp" %>
+	<% if (request.getAttribute("error") != null) { %>
+		<%! String s1 = ""; %>
+		<% s1 = (String) request.getAttribute("error");%>
+		<script type="text/javascript">
+			function alertName() {
+				var str="<%=s1%>";
+				alert("An error has occured: " + str);
+		} 
+		</script>
+		<script type="text/javascript"> 
+			window.onload = alertName; 
+		</script>
+		<!--%= request.getAttribute("error") %-->
+	<% } %>
 
-<h3>Please enter the ID of your Shop!</h3>
+	<h3>Please enter the ID of your Shop!</h3>
 	
 	<form method="post">
 		<label for="shopID">Shop ID</label>

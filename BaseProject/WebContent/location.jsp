@@ -13,90 +13,53 @@
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
    </head>
 <body>
-      <nav class="navbar navbar-default">
-         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               </button>
-               <a class="navbar-brand" href="./index.htm">Festival</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-               <ul class="nav navbar-nav">
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee <span class="caret"></span></a>
-                     <ul class="dropdown-menu">
-                        <li><a href="./ShiftServlet">Search Shifts</a></li>
-			<li><a href="./insertProduct">Insert new product</a></li>
-                     </ul>
-                  </li>
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitor <span class="caret"></span></a>
-                     <ul class="dropdown-menu">
-                        <li><a href="./SearchProduct.jsp">Activity Diagram</a></li>
-                        <li><a href="./stage">Search personal stages</a></li>
-			<li><a href="./SearchProduct.jsp">Search for a product</a></li>
-                     </ul>
-                  </li>
-               </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-         </div>
-         <!-- /.container-fluid -->
-      </nav>
-		<%--check if there is an error when searching for the offers
-		If yes, just return "offers not found" and the page is done
-		If no, go ahead--%>
-		<%
-			if (request.getAttribute("error") != null) {
-		%>
+	<%@include file="./header.jsp" %>
+      
+	<%--check if there is an error when searching for the offers
+	If yes, just return "offers not found" and the page is done
+	If no, go ahead--%>
+	<% if (request.getAttribute("error") != null) { %>
 		<h3><%=request.getAttribute("error") %></h3>
-	<%
-		} else {
-	%>
-	<%-- get the list of offers--%>
-	<h1>You can find this item in the shops below.</h1>
-	<%
-		ArrayList<LocationBean> locations = (ArrayList<LocationBean>) request
-					.getAttribute("locations");
-	%>
-	<%-- output the results --%>
-	<%
-		for (int i = 0; i < locations.size(); i++) {
-	%>
+	<% } else { %>
+		<%-- get the list of offers--%>
+		<% ArrayList<LocationBean> locations = (ArrayList<LocationBean>) request.getAttribute("locations"); %>
+		<h1>You can find <%=locations.get(0).getProductName()%> in the following shops:</h1>
+		
+		<%-- output the results --%>
+		<% for (int i = 0; i < locations.size(); i++) { %>
 	
-	<p class="lead">
-		<div><strong>Product Name:</strong>
-		<span><%=locations.get(i).getName()%></span>
-		</div><br />
-		<div><strong>Area Name:</strong>
-		<span><%=locations.get(i).getAreaName()%></span>
-		</div><br />
-		<div><strong>Type of the Area:</strong>
-		<span><%=locations.get(i).getType()%></span>
-		</div><br />
-		<div><strong>Type of the Shop:</strong>
-		<span><%=locations.get(i).getShopType()%></span>
-		</div>
-	</p>
+			<p class="lead">
+				<div>
+					<strong>Shop ID:</strong>
+					<span><%=locations.get(i).getShopID()%></span>
+				</div>
+				<div>
+					<strong>Type of the Shop:</strong>
+					<span><%=locations.get(i).getShopType()%></span>
+				</div>
+				<div>
+					<strong>Area Name:</strong>
+					<span><%=locations.get(i).getAreaName()%></span>
+				</div>
+				<div>
+					<strong>Area ID:</strong>
+					<span><%=locations.get(i).getAreaID()%></span>
+				</div>
+				<div>
+					<strong>Type of the Area:</strong>
+					<span><%=locations.get(i).getAreaType()%></span>
+				</div><br />
+
+			</p>
 	
-	<%
-		}
-	%>
-	<%
-		}
-	%>
+		<% } %>
+	<% } %>
 	<%-- go back --%>
-	<a href="./SearchProduct.jsp">find some other products :)</a>
-	<a href="./index.htm">back</a>
-	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="bootstrap/js/bootstrap.min.js"></script>
+	<a href="./SearchProduct.jsp">Find some other products :)</a>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
