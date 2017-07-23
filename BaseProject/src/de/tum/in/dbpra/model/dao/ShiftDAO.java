@@ -17,7 +17,8 @@ public class ShiftDAO extends DAO {
 		String query2 = "SELECT s.* FROM shift s JOIN person p ON s.employeeID = p.personID WHERE p.firstname = ? and p.lastname = ?;";
 		
 		Connection con = getConnection();
-
+		con.setAutoCommit(false);
+		
 		PreparedStatement pstmt1 = con.prepareStatement(query1);
 		PreparedStatement pstmt2 = con.prepareStatement(query2);
 
@@ -32,8 +33,10 @@ public class ShiftDAO extends DAO {
 		}
 		
 		if (size == 0) {
+			con.rollback();
 			throw new EmployeeNotFoundException("error1");
 		} else if (size > 1) {
+			con.rollback();
 			throw new SeveralEmployeesFoundException("error2");
 		} else {
 			pstmt2.setString(1, firstname);
@@ -49,7 +52,8 @@ public class ShiftDAO extends DAO {
 				shift.setAdditionInfo(rs2.getString("additionInfo"));
 				shiftList.add(shift);
 			}
-
+			
+			con.commit();
 			rs2.close();
 			pstmt2.close();
 		}
