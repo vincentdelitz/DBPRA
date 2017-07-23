@@ -29,6 +29,7 @@ public class OfferProductDAO extends DAO {
 			p.setQuantity(rs.getInt("quantity"));
 			p.setPrice(rs.getDouble("price"));
 			p.setAreaname(rs.getString("areaname"));
+			p.setPname(rs.getString("name"));
 			p.setShopID(rs.getInt("shopID"));
 			offers.add(p);
 			count++;

@@ -34,20 +34,6 @@ public class OfferProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	RequestDispatcher dispatcher = request.getRequestDispatcher("/SearchProduct.jsp");
 		dispatcher.forward(request, response);
-    	
-//		String pname = (String) request.getParameter("name");
-//		try {
-//			HttpSession session = request.getSession();
-//			OfferProductDAO dao = new OfferProductDAO();
-//			ArrayList<OfferProductBean> offers = dao.getOffer(pname);
-//			session.setAttribute("offers", offers);
-//			request.setAttribute("pname",pname);
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//			request.setAttribute("error", e.getMessage());
-//		}
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/offer.jsp");
-//		dispatcher.forward(request, response);
 	}
 
 	/**
