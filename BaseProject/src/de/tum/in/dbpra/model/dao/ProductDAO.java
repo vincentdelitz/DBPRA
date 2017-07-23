@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import de.tum.in.dbpra.model.bean.OfferProductBean;
 import de.tum.in.dbpra.model.bean.ProductBean;
 import de.tum.in.dbpra.model.bean.ProductListBean;
+import de.tum.in.dbpra.model.dao.OfferProductDAO.OffersNotFoundException;
 
 public class ProductDAO extends DAO {
 	
@@ -119,6 +122,55 @@ public class ProductDAO extends DAO {
 			pstmt2.close();
 			return productID;
 		}
+	}
+	
+	public ArrayList<ProductBean> getProductSearchResults(String pname) throws SQLException, OffersNotFoundException, ClassNotFoundException {
+		String query = "SELECT name, price, producttype " +
+			"FROM product " +
+			"WHERE lower(name) like lower(?) GROUP BY name,producttype, price;";
+		
+				//execute query
+				Connection con = getConnection();
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setString(1, "%"+pname+"%");
+				ResultSet rs = pstmt.executeQuery();
+
+				ArrayList<ProductBean> products = new ArrayList<ProductBean>();
+
+				int count = 0;
+				
+				//fill ProductBean
+				while (rs.next()) {
+					ProductBean p = new ProductBean();
+					p.setName(rs.getString("name"));
+					p.setType(rs.getString("producttype"));
+					p.setPrice(rs.getDouble("price"));
+					products.add(p);
+					count++;
+				}
+				
+				//if count=0, there is no result in the result set.
+				//So we consider it as an exception and rollback the transaction
+				if (count == 0) {
+					rs.close();
+					pstmt.close();
+					con.rollback();
+					con.close();
+					throw new OffersNotFoundException("There is no product found for "+pname+"!");
+
+				} 
+				
+				//otherwise commit it
+				else {
+					rs.close();
+					pstmt.close();
+					con.commit();
+					con.close();
+				}
+				
+				return products;
+		
 	}
 	
 		public static class ProductExistsException extends Throwable {
