@@ -16,8 +16,8 @@
 	<h4>Please insert the name of the product that you want to search for. The search value does not need to be exact, as it also searches for similar values.</h4>
 	<%-- input the productID--%>
 	
-	<form action="./OfferProductServlet" method="POST">
-		Product Name:<input type="text" name="name"/> <input type="submit" VALUE="submit" />
+	<form action="./ProductServlet" method="GET">
+		Product Name:<input type="text" name="product_name"/> <input type="submit" VALUE="submit" />
 	</form>
 	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

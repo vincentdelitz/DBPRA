@@ -9,7 +9,7 @@ public class OfferProductDAO extends DAO {
 	public ArrayList<OfferProductBean> getOffer(String pname)
 			throws ClassNotFoundException, SQLException, OffersNotFoundException {
 		String query = "SELECT area.areaID, areaname, shop.shopID, quantity, product.productID, name, product.price FROM offer join shop on(shop.shopID=offer.shopID) join product on "
-				+ "(product.productID=offer.productID) join area on (area.areaID=shop.areaID) where lower(name) like lower('%"+pname+"%');";
+				+ "(product.productID=offer.productID) join area on (area.areaID=shop.areaID) where lower(name) like lower('"+pname+"');";
 
 		//execute query
 		Connection con = getConnection();
@@ -24,6 +24,7 @@ public class OfferProductDAO extends DAO {
 		//fill offerBean
 		while (rs.next()) {
 			OfferProductBean p = new OfferProductBean();
+			p.setPname(rs.getString("name"));
 			p.setProductID(rs.getInt("productID"));
 			p.setAreaID(rs.getInt("areaID"));
 			p.setQuantity(rs.getInt("quantity"));
