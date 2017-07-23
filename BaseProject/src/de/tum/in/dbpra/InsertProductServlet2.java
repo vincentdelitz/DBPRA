@@ -72,6 +72,8 @@ public class InsertProductServlet2 extends HttpServlet {
 			ProductDAO product = new ProductDAO();
 			product.getProductsForShop(productList, shopID);
 			request.setAttribute("bean",productList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("successfulInsert.jsp");
+			dispatcher.forward(request, response);
 
 		} catch (Throwable e) {
 			String errormessage = e.getMessage();

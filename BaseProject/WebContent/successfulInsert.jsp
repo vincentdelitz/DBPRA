@@ -58,6 +58,10 @@
 </div>
 <% }   %>
 
+<br>
+<a href="insertProduct.jsp">Add another Product!</a>
+
+
         	
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
