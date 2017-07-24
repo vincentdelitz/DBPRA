@@ -53,8 +53,8 @@ public class StageDAO extends DAO {
 			stage.setName(rs.getString("stagename"));
 			stage.setSize(rs.getDouble("size"));
 			stage.setBandName(rs.getString("bandName"));
-			stage.setPerformanceStart(rs.getString("performanceStart"));
-			stage.setPerformanceEnd(rs.getString("performanceEnd"));
+			stage.setPerformanceStart(rs.getTimestamp("performanceStart"));
+			stage.setPerformanceEnd(rs.getTimestamp("performanceEnd"));
 			stagelist.setChild(stage);
 		}
 
