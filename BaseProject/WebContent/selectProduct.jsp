@@ -23,7 +23,7 @@
 	<% if (request.getAttribute("error") != null) { %>
 		<h3><%=request.getAttribute("error") %></h3>
 	<% } else { %>
-		<h1>Products</h1>
+		<h1>Products that fit your search</h1>
 		<%-- get the list of products--%>
 		<table class="table table-striped">
 			<%-- output the results --%>
@@ -42,7 +42,7 @@
 				<% for (int i=0; i < products.size(); i++) { 
 					ProductBean product = products.get(i); %>
 					<tr>
-						<td><a href="./OfferProductServlet?name=<%=products.get(i).getName()%>">See Detailed Offers</a></td>
+						<td><a href="./OfferProductServlet?name=<%=products.get(i).getName()%>">See Offering Shops</a></td>
 						<td><%=products.get(i).getName()%></td>
 						<td><%=products.get(i).getType()%></td>
 						<td><%=products.get(i).getPrice()%></td>

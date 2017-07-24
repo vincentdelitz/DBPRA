@@ -27,7 +27,8 @@
 	<% if (request.getAttribute("error") != null) { %>
 		<h3><%=request.getAttribute("error") %></h3>
 	<% } else { %>
-		<h1>Offers</h1>
+		<% ArrayList<OfferProductBean> offers = (ArrayList<OfferProductBean>)session.getAttribute("offers"); %>
+		<h1>Shops that offer the Product <%=offers.get(0).getPname()%></h1>
 		<%-- get the list of offers--%>
 		<table class="table table-striped">
 			<%-- output the results --%>
@@ -35,25 +36,16 @@
 				<tr>
 				<%--the headlines for each columns --%>
 					<th></th>
-					<th>productID</th>
-					<th>Product Name</th>
-					<th>AreaID</th>
-					<th>Area Name</th>
 					<th>ShopID</th>
-					<th>Quantity</th>
+					<th>Product Quantity</th>
 				</tr>
 			</thead>
-			<% ArrayList<OfferProductBean> offers = (ArrayList<OfferProductBean>)session.getAttribute("offers"); %>
+			
 			<tbody> 
 
-				<% for (int i=0; i < offers.size(); i++) { 
-					offer = (OfferProductBean)offers.get(i); %>
+				<% for (int i=0; i < offers.size(); i++) { %>
 					<tr>
-						<td><a href="./locationServlet?product_id=<%=offers.get(i).getProductID()%>&shop_id=<%=offers.get(i).getShopID()%>">See Location</a></td>
-						<td><%=offers.get(i).getProductID()%></td>
-						<td><%=offers.get(i).getPname()%></td>
-						<td><%=offers.get(i).getAreaID()%></td>
-						<td><%=offers.get(i).getAreaname()%></td>
+						<td><a href="./locationServlet?product_id=<%=offers.get(i).getProductID()%>&shop_id=<%=offers.get(i).getShopID()%>">See Location Details</a></td>
 						<td><%=offers.get(i).getShopID()%></td>
 						<td><%=offers.get(i).getQuantity()%></td>
 					</tr>
