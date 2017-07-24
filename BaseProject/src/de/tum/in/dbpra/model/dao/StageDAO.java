@@ -10,8 +10,7 @@ import de.tum.in.dbpra.model.bean.StageListBean;
 
 public class StageDAO extends DAO {
 
-	public void getPersonalStages(StageListBean stagelist, String firstname,
-			String lastname) throws SQLException, ClassNotFoundException {
+	public void getPersonalStages(StageListBean stagelist, String visitorid) throws SQLException, ClassNotFoundException {
 
 		
 		String query = "SELECT DISTINCT person.personID, person.firstname, person.lastname, stage.stageNr, stage.stagename, stage.size, band.bandName, band.performanceStart, band.performanceEnd"
@@ -19,7 +18,7 @@ public class StageDAO extends DAO {
 				+ " ON stage.stageNr = lineup.stageNr INNER JOIN band ON lineup.bandID = band.bandID"
 				+ " INNER JOIN timetable ON timetable.bandID = band.bandID INNER JOIN visitor"
 				+ " ON timetable.visitorID = visitor.visitorID INNER JOIN Person ON visitor.visitorID = person.personID"
-				+ " WHERE person.firstname = ? AND person.lastname = ?"
+				+ " WHERE person.personid = ?"
 				+ " ORDER BY person.personID, stage.stageNr, band.performanceStart;";
 
 		Connection con = getConnection();
@@ -27,22 +26,17 @@ public class StageDAO extends DAO {
 
 		PreparedStatement pstmt = con.prepareStatement(query);
 		
-		if(firstname.equals("")||firstname.equals(null)){
+		/*if(firstname.equals("")||firstname.equals(null)){
 			throw new SQLException("Please enter a first name");
 		}
 		
 		if(lastname.equals("")||lastname.equals(null)){
 			throw new SQLException("Please enter a last name");
-		}
+		}*/
 		
-		pstmt.setString(1, firstname);
-		pstmt.setString(2, lastname);
+		pstmt.setInt(1, Integer.parseInt(visitorid));
 
 		ResultSet rs = pstmt.executeQuery();
-		
-		if(!rs.next()){
-			throw new SQLException("There is no visitor " + firstname + " " +lastname);
-		}
 
 		while (rs.next()) {
 			StageBean stage = new StageBean();

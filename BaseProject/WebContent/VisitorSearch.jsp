@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
-<%@ page import="java.sql.*" %>
 
- <jsp:useBean id="bean" scope="request" class="de.tum.in.dbpra.model.bean.StageListBean"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,7 +22,7 @@
 	
 				<div class="row">
 					<div class="col-md-5">
-						<form method="post">
+						<form  action="./VisitorServlet" method="GET">
 							<div class="form-group">
 								<label for="firstname">First name visitor</label>
 								<input class="form-control" type="text" name="firstname" id="firstname" default="Max" placeholder="First Name" />
@@ -39,52 +36,7 @@
 					</div>
 				</div>
 
-
-				<% if (request.getAttribute("error") != null) { %>
-	
-			 		<%! String s1 = ""; %>
-			 		<% s1 = (String) request.getAttribute("error");%>
-			 		<script type="text/javascript">
-				 		function alertName(){
-				 			var str="<%=s1%>";
-				 			alert("An error has occured: " + str);
-				 		} 
-			 		</script>
-			 		<script type="text/javascript"> 
-			 			window.onload = alertName; 
-			 		</script>
-			
-				<% } else if(bean.getList().size()!=0){ %>
-					<div class="row" style="margin-top: 30px;">
-						<div class="col-md-12">
-			        		<div class="box">
-								
-								<h4>These are your stages and corresponding music acts <%=bean.getChild(0).getPersFirstName()%> <%=bean.getChild(0).getPersLastName()%></h4>
-								
-								<table  class="table table-striped">
-									<tr>
-										<th>StageID</th>
-										<th>Stage Name</th>
-										<th>Size</th>
-										<th>Name of Band</th>
-										<th>Performance Start</th>
-										<th>Performance End</th>
-									</tr>
-									<% for (int i = 0; i < bean.getList().size(); i++) { %>
-										<tr>
-											<td><%=bean.getChild(i).getStageID()%></td>
-											<td><%=bean.getChild(i).getName()%></td>
-											<td><%=bean.getChild(i).getSize()%></td>
-											<td><%=bean.getChild(i).getBandName()%></td>
-											<td><%=bean.getChild(i).getPerformanceStart()%></td>
-											<td><%=bean.getChild(i).getPerformanceEnd()%></td>
-										</tr>
-									<% } %>
-								</table>
-							</div>
-						</div>
-					</div>
-        		<% } %>
+				
         	</div>
         </div>
 	</div>
