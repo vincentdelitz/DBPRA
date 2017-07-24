@@ -1,5 +1,7 @@
 package de.tum.in.dbpra.model.bean;
 
+import java.sql.Timestamp;
+
 public class StageBean {
 	private String persID;
 	private String persFirstName;
@@ -8,8 +10,8 @@ public class StageBean {
 	private String name;
 	private double size;
 	private String bandName;
-	private String performanceStart;
-	private String performanceEnd;
+	private Timestamp performanceStart;
+	private Timestamp performanceEnd;
 
 	
 	public StageBean() {}
@@ -75,19 +77,19 @@ public class StageBean {
 		this.bandName = bandName;
 	}
 	
-	public void setPerformanceStart(String performanceStart) {
+	public void setPerformanceStart(Timestamp performanceStart) {
 		this.performanceStart = performanceStart;
 	}
 	
-	public String getPerformanceStart() {
+	public Timestamp getPerformanceStart() {
 		return performanceStart;
 	}
 	
-	public void setPerformanceEnd(String performanceEnd) {
+	public void setPerformanceEnd(Timestamp performanceEnd) {
 		this.performanceEnd = performanceEnd;
 	}
 	
-	public String getPerformanceEnd() {
+	public Timestamp getPerformanceEnd() {
 		return performanceEnd;
 	}
 
