@@ -25,7 +25,7 @@
             	<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Visitor <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="./VisitorSearch.jsp">Search personal stages</a></li>
+						<li><a href="./VisitorServlet">Search personal stages</a></li>
 						<li><a href="./SearchProduct.jsp">Search for a product</a></li>
 					</ul>
 				</li>
