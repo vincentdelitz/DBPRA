@@ -26,7 +26,7 @@
 	<% } else { %>
 		<%-- get the list of offers--%>
 		<% ArrayList<LocationBean> locations = (ArrayList<LocationBean>) request.getAttribute("locations"); %>
-		<h4>You can find <%=locations.get(0).getProductName()%> in the following shops:</h4>
+		<h4>You can find <%=locations.get(0).getProductName()%> in the following shop:</h4>
 		
 		<%-- output the results --%>
 		<% for (int i = 0; i < locations.size(); i++) { %>
@@ -49,11 +49,19 @@
 	</div>
 	</div>
 	<%-- go back --%>
+		
+		<div class="row">
+			<div class="col-md-2">
+			<a class="btn btn-primary" href="./offerProduct.jsp" role="button">Back to Offering Shops</a>
+			</div>
+		</div>
+		<br>
 		<div class="row">
 			<div class="col-md-2">
 			<a class="btn btn-primary" href="./SearchProduct.jsp" role="button">Back to Product Search</a>
 			</div>
 		</div>
+
 	</div>
 	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
