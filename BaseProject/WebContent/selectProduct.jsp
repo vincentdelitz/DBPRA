@@ -14,16 +14,18 @@
    </head>
 <body>
 	<%@include file="./header.jsp" %>
-      
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10">
 	<%--check if there is an error when searching for the offers
 	If yes, just return "offers not found" and the page is done
 	If no, go ahead--%>
 	<% if (request.getAttribute("error") != null) { %>
 		<h3><%=request.getAttribute("error") %></h3>
 	<% } else { %>
+		<h1>Products</h1>
 		<%-- get the list of products--%>
 		<table class="table table-striped">
-			<caption><h1>Products</h1></caption>
 			<%-- output the results --%>
 			<thead>
 				<tr>
@@ -50,7 +52,14 @@
 		</table>
 	<% } %>
 	<%-- go back --%>
-	<a href="./SearchProduct.jsp">Find some other products :)</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+			<a class="btn btn-primary" href="./SearchProduct.jsp" role="button">Back to Product Search</a>
+			</div>
+		</div>
+	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

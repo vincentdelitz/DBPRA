@@ -11,28 +11,38 @@
 </head>
 <body>
 <%@include file="./header.jsp" %>
-
+ <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10">
 	<% if (request.getAttribute("error1") != null) { %>
 		<h3>There is no employee with the following name: <%=request.getParameter("firstname")%> <%=request.getParameter("lastname")%></h3>
 		<br>
 		<h4>Try again! Please enter exact values for the first and last name, as it is also case sensitive.</h4>
 		<br>
 	<% } else { %>
-		<h1>Please enter your name to search for your shifts</h1>
+		<h3>Please enter your name to search for your shifts</h3>
 		<br>
 		<h4>Please enter exact values for the first and last name, as it is also case sensitive.</h4>
 		<br>
 	<% } %>
-	<form method="post">
-		<label for="firstname">First Name:</label>
-		<input type="text" name="firstname" id="firstname" default="1" />
-		<br/>		
-		<label for="lastname">Last Name:</label>
-		<input type="text" name="lastname" id="lastname" default="1" />
-		<br/><br>
-		<input type="submit" value="GET SHIFTS" />
-	</form>
-
+			<div class="row">
+					<div class="col-md-4">
+						<form method="post">
+							<div class="form-group">
+								<label for="firstname">First Name:</label>
+								<input class="form-control" type="text" name="firstname" id="firstname" default="1" placeholder="Enter First Name" />
+							</div>
+							<div class="form-group">		
+								<label for="lastname">Last Name:</label>
+								<input class="form-control type="text" name="lastname" id="lastname" default="1" placeholder="Enter Last Name" />
+							</div>
+							<button class="btn btn-primary" type="submit">Get Shifts</button>
+						</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -13,21 +13,30 @@
 </head>
 <body>
 <%@include file="./header.jsp" %>
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10">
 
 <h2>Stages and corresponding music acts</h2>
 <h4>Here you can search for the stages that a certain visitor will see while watching his acts. Please enter exact values for the first and last name, as it is also case sensitive.</h4>
 	
+	<div class="row">
+		<div class="col-md-5">
+			<form method="post">
+			<div class="form-group">
+				<label for="firstname">First name visitor</label>
+				<input class="form-control" type="text" name="firstname" id="firstname" default="Max" placeholder="First Name" />
+			</div>
+			<div class="form-group">
+				<label for="lastname">Last name visitor</label>
+				<input class="form-control" type="text" name="lastname" id="lastname" default="Mustermann" placeholder="Last Name" />
+			</div>
+			<button class="btn btn-primary" type="submit">Search</button>
+			</form>
+		</div>
+	</div>
 
-	<form method="post">
-		<label for="firstname">First name visitor</label>
-		<input type="text" name="firstname" id="firstname" default="Max" />
-			<br/>
-	<label for="lastname">Last name visitor</label>
-		<input type="text" name="lastname" id="lastname" default="Mustermann" />
-			<br/>
-			<input type="submit" value="search" />
-	</form>
-</br>
+
 <% if (request.getAttribute("error") != null) { %>
 	
  	<%! String s1 = ""; %>
@@ -41,6 +50,8 @@
  	<script type="text/javascript"> window.onload = alertName; </script>
 
 	<% } else if(bean.getList().size()!=0){ %>
+	<div class="row" style="margin-top: 30px;">
+	<div class="col-md-12">
         		<div class="box">
 		<table  class="table table-striped">
 			<tr>
@@ -74,8 +85,12 @@
 			%>
 		</table>
 	</div>
-</div>
+	</div>
+	</div>
         	<% } %>
+        	</div>
+        	</div>
+        	</div>
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

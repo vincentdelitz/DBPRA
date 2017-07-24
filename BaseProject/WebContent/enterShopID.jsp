@@ -12,6 +12,9 @@
 </head>
 <body>
 	<%@include file="./header.jsp" %>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3">
 	<% if (request.getAttribute("error") != null) { %>
 		<%! String s1 = ""; %>
 		<% s1 = (String) request.getAttribute("error");%>
@@ -30,14 +33,19 @@
 	<h3>Please enter the ID of your Shop!</h3>
 	
 	<form method="post">
+	<div class="form-group">
 		<label for="shopID">Shop ID</label>
-		<input type="number" name="shopID" id="shopID"/>
-			<br/>
+		<input class="form-control" type="number" name="shopID" id="shopID" placeholder="Shop ID" />
+	</div>
+	<div class="form-group">
 		<label for="quantity">Quantity of Product:</label>
-		<input type="number" name="quantity" id="quantity"/>
-			<br>
-		<input type="submit" value="Insert" />
+		<input class="form-control" type="number" name="quantity" id="quantity" placeholder="Quantity" />
+	</div>
+	<button type="submit" class="btn btn-primary">Insert</button>
 	</form>
+	</div>
+	</div>
+	</div>
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

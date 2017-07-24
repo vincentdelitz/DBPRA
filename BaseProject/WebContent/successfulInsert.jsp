@@ -12,7 +12,9 @@
 </head>
 <body>
 <%@include file="./header.jsp" %>
-
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-10">
 
 <% if (request.getAttribute("error") != null) { %>
 	<%! String s1 = ""; %>
@@ -55,11 +57,12 @@
 			%>
 		</table>
 	</div>
-</div>
 <% }   %>
 
-<br>
 <a href="insertProduct.jsp">Add another Product!</a>
+</div>
+</div>
+</div>
 
 
         	
