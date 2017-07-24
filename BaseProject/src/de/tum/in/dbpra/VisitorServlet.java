@@ -50,7 +50,7 @@ public class VisitorServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/VisitorSearch.jsp");
 				dispatcher.forward(request, response);
 			} else if (errormessage == "error2") {
-				request.setAttribute("error", "There are Several Visitor with your name, " + request.getParameter("firstname") + " " + request.getParameter("lastname") + "! Please enter your visitor ID aswell!");
+				request.setAttribute("error", "There are Several Visitor with your name, " + request.getParameter("firstname") + " " + request.getParameter("lastname") + "! Please enter your Ticket ID aswell!");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/VisitorSearchByID.jsp");
 				dispatcher.forward(request, response);
 			} else {

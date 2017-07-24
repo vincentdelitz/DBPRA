@@ -51,14 +51,14 @@ public class VisitorServlet2 extends HttpServlet {
         	StageListBean stages = new StageListBean();
         	String firstname = request.getParameter("firstname");
         	String lastname = request.getParameter("lastname");
-        	if (request.getParameter("visitorID") == "") {
+        	if (request.getParameter("ticketID") == "") {
         		dao.getPersonalStages(stages, firstname, lastname);
         		request.setAttribute("stages", stages);
             	RequestDispatcher dispatcher = request.getRequestDispatcher("/VisitorSearch.jsp");
         		dispatcher.forward(request, response);
         	} else {
-        		int visitorID = Integer.parseInt(request.getParameter("visitorID"));
-            	dao.getPersonalStagesByID(stages,  firstname, lastname, visitorID);
+        		int ticketID = Integer.parseInt(request.getParameter("ticketID"));
+            	dao.getPersonalStagesByID(stages,  firstname, lastname, ticketID);
             	request.setAttribute("stages", stages);
             	RequestDispatcher dispatcher = request.getRequestDispatcher("/VisitorSearchByID.jsp");
         		dispatcher.forward(request, response);
@@ -75,7 +75,7 @@ public class VisitorServlet2 extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/VisitorSearchByID.jsp");
 				dispatcher.forward(request, response);
 			} else if (errormessage == "error3") {
-				request.setAttribute("error", "There is no Visitor named, " + request.getParameter("firstname") + " " + request.getParameter("lastname") + " with the following Person ID: " + request.getParameter("visitorID") +"! Please try again!");
+				request.setAttribute("error", "There is no Visitor named, " + request.getParameter("firstname") + " " + request.getParameter("lastname") + " with the following Ticket ID: " + request.getParameter("ticketID") +"! Please try again!");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/VisitorSearchByID.jsp");
 				dispatcher.forward(request, response);
 			} else {

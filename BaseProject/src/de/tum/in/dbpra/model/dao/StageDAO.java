@@ -74,7 +74,7 @@ public class StageDAO extends DAO {
 
 	}
 	
-	public void getPersonalStagesByID(StageListBean stagelist, String firstname, String lastname, int visitorID) throws SQLException, ClassNotFoundException, VisitorNotFoundException, SeveralVisitorsFouncException {
+	public void getPersonalStagesByID(StageListBean stagelist, String firstname, String lastname, int ticketID) throws SQLException, ClassNotFoundException, VisitorNotFoundException, SeveralVisitorsFouncException {
 
 
 		String query = "SELECT DISTINCT person.personID, person.firstname, person.lastname, stage.stageNr, stage.stagename, stage.size, band.bandName, band.performanceStart, band.performanceEnd"
@@ -82,7 +82,7 @@ public class StageDAO extends DAO {
 				+ " ON stage.stageNr = lineup.stageNr INNER JOIN band ON lineup.bandID = band.bandID"
 				+ " INNER JOIN timetable ON timetable.bandID = band.bandID INNER JOIN visitor"
 				+ " ON timetable.visitorID = visitor.visitorID INNER JOIN Person ON visitor.visitorID = person.personID"
-				+ " WHERE person.firstname = ? AND person.lastname = ? AND person.personid = ?"
+				+ " WHERE person.firstname = ? AND person.lastname = ? AND visitor.ticketid = ?"
 				+ " ORDER BY person.personID, stage.stageNr, band.performanceStart;";
 
 		Connection con = getConnection();
@@ -90,7 +90,7 @@ public class StageDAO extends DAO {
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, firstname);
 		pstmt.setString(2, lastname);
-		pstmt.setInt(3, visitorID);
+		pstmt.setInt(3, ticketID);
 
 		ResultSet rs = pstmt.executeQuery();
 		

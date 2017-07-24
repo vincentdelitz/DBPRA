@@ -35,8 +35,8 @@
 								<input class="form-control" type="text" name="lastname" value=<%=session.getAttribute("lastname")%> />
 							</div>
 							<div class="form-group">
-								<label for="visitorID">Visitor ID</label>
-								<input class="form-control" type="number" name="visitorID" id="visitorID" />
+								<label for="ticketID">Ticket ID</label>
+								<input class="form-control" type="number" name="ticketID" id="ticketID" />
 							</div>
 							<button class="btn btn-primary" type="submit">Search</button>
 						</form>
