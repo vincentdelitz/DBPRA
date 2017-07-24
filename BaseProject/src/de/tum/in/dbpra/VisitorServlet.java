@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import de.tum.in.dbpra.model.bean.StageListBean;
-import de.tum.in.dbpra.model.bean.VisitorBean;
 import de.tum.in.dbpra.model.dao.StageDAO;
 
 @WebServlet("/VisitorServlet")
