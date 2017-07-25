@@ -94,7 +94,8 @@ public class StageDAO extends DAO {
 
 		ResultSet rs = pstmt.executeQuery();
 		
-		if (rs.next()) {
+		int count = 0;
+		while (rs.next()) {
 			StageBean stage = new StageBean();
 			stage.setPersID(rs.getString("personID"));
 			stage.setPersFirstName(rs.getString("firstname"));
@@ -106,7 +107,10 @@ public class StageDAO extends DAO {
 			stage.setPerformanceStart(rs.getTimestamp("performanceStart"));
 			stage.setPerformanceEnd(rs.getTimestamp("performanceEnd"));
 			stagelist.setChild(stage);
-		} else {
+			count ++;
+		} 
+		
+		if (count == 0) {
 			throw new VisitorNotFoundException("error3");
 		}
 
