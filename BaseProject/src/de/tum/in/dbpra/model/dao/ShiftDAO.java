@@ -78,7 +78,8 @@ public class ShiftDAO extends DAO {
 		pstmt.setString(3, lastname);
 		ResultSet rs = pstmt.executeQuery();
 		
-		if(rs.next()) {
+		int count = 0;
+		while (rs.next()) {
 			ShiftBean shift = new ShiftBean();
 			shift.setEmployeeID(rs.getInt("employeeID"));
 			shift.setAreaID(rs.getInt("areaID"));
@@ -86,7 +87,9 @@ public class ShiftDAO extends DAO {
 			shift.setEndtime(rs.getTimestamp("endtime"));
 			shift.setAdditionInfo(rs.getString("additionInfo"));
 			shiftList.add(shift);
-		} else {
+			count++;
+		} 
+		if (count == 0) {
 			throw new EmployeeNotFoundException("error3");
 		}
 		
