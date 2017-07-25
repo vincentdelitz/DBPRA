@@ -27,7 +27,7 @@
 	<% } %>
 			<div class="row">
 					<div class="col-md-4">
-						<form method="post">
+						<form method="post" action="./ShiftServlet1">
 							<div class="form-group">
 								<label for="firstname">First Name:</label>
 								<input class="form-control" type="text" name="firstname" id="firstname" default="1" placeholder="Enter First Name" />

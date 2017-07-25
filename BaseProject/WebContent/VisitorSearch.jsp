@@ -24,7 +24,7 @@
 	
 				<div class="row">
 					<div class="col-md-5">
-						<form  method="post">
+						<form  method="post" action="./VisitorServlet">
 							<div class="form-group">
 								<label for="firstname">First name visitor</label>
 								<input class="form-control" type="text" name="firstname" id="firstname" default="Max" placeholder="First Name" />
