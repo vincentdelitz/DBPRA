@@ -86,7 +86,8 @@ public class StageDAO extends DAO {
 				+ " ORDER BY person.personID, stage.stageNr, band.performanceStart;";
 
 		Connection con = getConnection();
-
+		con.setAutoCommit(false);
+		
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, firstname);
 		pstmt.setString(2, lastname);
@@ -111,9 +112,11 @@ public class StageDAO extends DAO {
 		} 
 		
 		if (count == 0) {
+			con.rollback();
 			throw new VisitorNotFoundException("error3");
 		}
-
+		
+		con.commit();
 		rs.close();
 		pstmt.close();
 		con.close();

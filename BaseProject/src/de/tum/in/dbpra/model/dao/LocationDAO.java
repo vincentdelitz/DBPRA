@@ -17,6 +17,8 @@ public class LocationDAO extends DAO {
       "WHERE product.productid = ? AND shop.shopid = ?";
     
     Connection con = getConnection();
+	con.setAutoCommit(false);
+
     PreparedStatement pstmt = con.prepareStatement(query);
     pstmt.setInt(1, product_id);
     pstmt.setInt(2, shop_id);
@@ -34,6 +36,7 @@ public class LocationDAO extends DAO {
       locations.add(location);
     }
     
+    con.commit();
     rs.close();
     pstmt.close();
     con.close();

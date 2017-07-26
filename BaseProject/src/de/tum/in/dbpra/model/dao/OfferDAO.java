@@ -23,6 +23,10 @@ public class OfferDAO extends DAO {
 		ResultSet rs2 = pstmt2.executeQuery();
 		
 		if (!rs2.next()){
+			con.rollback();
+			con.close();
+			rs2.close();
+			pstmt2.close();
 			throw new ShopNotExistsException("error1");
 		} else {
 		
@@ -33,6 +37,12 @@ public class OfferDAO extends DAO {
 			ResultSet rs = pstmt1.executeQuery();
 			
 			if (rs.next()){
+				con.rollback();
+				con.close();
+				rs2.close();
+				rs2.close();
+				pstmt1.close();
+				pstmt2.close();
 				throw new OfferExistsException("error2");
 			} else {
 				PreparedStatement pstmt = con.prepareStatement(query);
@@ -47,10 +57,10 @@ public class OfferDAO extends DAO {
 			}
 			rs.close();
 			pstmt1.close();
+			rs2.close();
+			pstmt2.close();
+			con.close();
 		}
-		rs2.close();
-		pstmt2.close();
-		con.close();
 
 	}
 	

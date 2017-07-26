@@ -71,6 +71,7 @@ public class ShiftDAO extends DAO {
 				"AND e.employeeID = ? AND p.firstname = ? AND p.lastname = ?;";
 		
 		Connection con = getConnection();
+		con.setAutoCommit(false);
 
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setInt(1, ID);
@@ -90,9 +91,11 @@ public class ShiftDAO extends DAO {
 			count++;
 		} 
 		if (count == 0) {
+			con.rollback();
 			throw new EmployeeNotFoundException("error3");
 		}
 		
+		con.commit();
 		rs.close();
 		pstmt.close();
 		con.close();
